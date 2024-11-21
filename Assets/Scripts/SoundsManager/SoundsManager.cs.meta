@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d4ea9b10a7ac43fcbab4c247917cb9e4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _audioSource: {instanceID: 0}
+  - _background: {instanceID: 0}
+  - _click: {instanceID: 0}
+  - _collision: {instanceID: 0}
+  - _victory: {instanceID: 0}
+  - _defeat: {instanceID: 0}
+  - _lazer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

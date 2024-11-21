@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 03e0fffba3f94034b9ab4e9229accfcf
+timeCreated: 1496518158
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92133
+  packageName: Animated Gas Planet
+  packageVersion: 1.0
+  assetPath: Assets/Animated Gas Planet/Skybox_Prefab 1.prefab
+  uploadId: 183348

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6145c794300e7824bba8606a69348cee
+timeCreated: 1491887196
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156548
+  packageName: Dark Singularity
+  packageVersion: 1.0
+  assetPath: Assets/Dark Singularity/Prefab/Materials/Shield.mat
+  uploadId: 336717
