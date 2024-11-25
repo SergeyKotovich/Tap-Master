@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -13,18 +12,20 @@ public class ShakeAnimationController : MonoBehaviour
     public void AddCubeForAnimation(RaycastHit cube)
     {
         _hitsShakeAnimation.Add(cube);
+        
     }
     public async UniTask ShakeAnimation()
     {
         foreach (var hit in _hitsShakeAnimation)
         {
-           // _soundsManager.PlayCollision();
-            hit.collider.transform.DOPunchScale(Vector3.one * 0.5f, _obstacleShakeDuration);
-            hit.collider.transform.DOScale(Vector3.one, _obstacleShakeDuration);
-            await UniTask.Delay(100);
+            hit.transform.DOPunchScale(Vector3.one * 0.5f, _obstacleShakeDuration);
+            hit.transform.DOScale(Vector3.one, _obstacleShakeDuration);
+            await UniTask.Delay(40);
         }
+    }
 
+    public void ResetHits()
+    {
         _hitsShakeAnimation.Clear();
     }
-    
 }

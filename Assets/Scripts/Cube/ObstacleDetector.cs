@@ -20,15 +20,28 @@ namespace Cube
 
         public void FindObstacleNeighbours()
         {
+            _shakeAnimationController.ResetHits();
             CollectNeighboursRecursive(_cube.position,_cube.up, 15f);
         }
 
         private void CollectNeighboursRecursive(Vector3 cube, Vector3 direction, float maxDistance)
         {
-            if (Physics.Raycast(cube,direction, out var hit, maxDistance) && hit.collider != null)
+            while (true)
             {
-                _shakeAnimationController.AddCubeForAnimation(hit);
-                CollectNeighboursRecursive(hit.transform.position, _cube.up, 1);
+                if (Physics.Raycast(cube, direction, out var hit, maxDistance))
+                {
+                    if (hit.collider != null)
+                    {
+                        _shakeAnimationController.AddCubeForAnimation(hit);
+                    }
+
+                    cube = hit.transform.position;
+                    direction = _cube.up;
+                    maxDistance = 1;
+                    continue;
+                }
+
+                break;
             }
         }
     }

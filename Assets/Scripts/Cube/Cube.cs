@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UniTaskPubSub;
 using UnityEngine;
 
 namespace Cube
@@ -7,7 +8,7 @@ namespace Cube
     public class Cube : MonoBehaviour
     {
         public bool IsMoving { get; private set; }
-        
+
         private readonly float _moveDuration = 4f;
         private readonly float _obstacleReturnDuration = 0.2f;
         private readonly int _distanceToDisable = 30;
@@ -20,11 +21,13 @@ namespace Cube
         private ShakeAnimationController _shakeAnimationController;
         private ObstacleDetector _obstacleDetector;
         private EffectFactory _effectFactory;
-        
+        private AsyncMessageBus _messageBus;
+
 
         public void Initialize(ObstacleDetector obstacleDetector, ShakeAnimationController shakeAnimationController,
-            EffectFactory effectFactory)
+            EffectFactory effectFactory, AsyncMessageBus messageBus)
         {
+            _messageBus = messageBus;
             _effectFactory = effectFactory;
             _shakeAnimationController = shakeAnimationController;
             _obstacleDetector = obstacleDetector;
@@ -51,16 +54,14 @@ namespace Cube
         {
             IsMoving = true;
             transform.SetParent(null);
-
+            _messageBus.Publish(new CubeWasDestroyedEvent());
             var endPosition = transform.position + transform.up * _distanceToDisable;
             var effect = _effectFactory.ShowEffect(gameObject);
             transform.DOMove(endPosition, _moveDuration).OnComplete(() =>
             {
                 _effectFactory.HideEffect(effect);
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             });
-
-           
         }
 
         private void MoveToObstacle()
@@ -68,7 +69,7 @@ namespace Cube
             _isGoingToObstacle = true;
 
             _initialPosition = transform.localPosition;
-            
+
             var targetPosition = _hit.transform.localPosition -
                                  (_hit.transform.localPosition - transform.localPosition).normalized * _shift;
 
@@ -76,7 +77,7 @@ namespace Cube
             sequence.Append(transform.DOLocalMove(targetPosition, _obstacleReturnDuration));
             sequence.AppendCallback(() => _shakeAnimationController.ShakeAnimation().Forget());
             sequence.Append(transform.DOLocalMove(_initialPosition, _obstacleReturnDuration));
-            sequence.OnComplete(() => _isGoingToObstacle = false);
+            sequence.OnComplete(() =>_isGoingToObstacle = false);
         }
 
 

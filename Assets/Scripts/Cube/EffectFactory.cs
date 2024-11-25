@@ -47,6 +47,7 @@ public class EffectFactory
 
     public void HideEffect(GameObject effect)
     {
+        effect.transform.SetParent(null);
         _effectsPool.Release(effect);
     }
 }

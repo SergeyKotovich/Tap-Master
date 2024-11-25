@@ -12,8 +12,8 @@ namespace DefaultNamespace.Shop
         private Button _selectedButton;
         private void Awake()
         {
-            _skinsButton.onClick.AddListener(() => OnButtonClick(_skinsButton));
-            _boostersButton.onClick.AddListener(() => OnButtonClick(_boostersButton));
+//           _skinsButton.onClick.AddListener(() => OnButtonClick(_skinsButton));
+//           _boostersButton.onClick.AddListener(() => OnButtonClick(_boostersButton));
         }
         
         private void OnButtonClick(Button clickedButton)

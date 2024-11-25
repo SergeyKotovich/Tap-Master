@@ -1,5 +1,9 @@
+using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UniTaskPubSub;
 using UnityEngine;
+using VContainer;
 
 public class Rotator : MonoBehaviour
 {
@@ -7,7 +11,19 @@ public class Rotator : MonoBehaviour
     private float _sensitivity;
 
     private bool CanRotate = true;
-    
+    private IDisposable _subscriptions;
+
+    [Inject]
+    public void Construct(AsyncMessageBus messageBus)
+    {
+        _subscriptions = messageBus.Subscribe<LevelCompleteEvent>(_ => ResetRotation());
+    }
+
+    private void ResetRotation()
+    {
+        transform.eulerAngles = Vector3.zero;
+    }
+
     private void Update()
     {
         if (!Input.GetMouseButton(0)) return;
@@ -36,4 +52,8 @@ public class Rotator : MonoBehaviour
         CanRotate = onOff;
     }
 
+    private void OnDestroy()
+    {
+        _subscriptions?.Dispose();
+    }
 }

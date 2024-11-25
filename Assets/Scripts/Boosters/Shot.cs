@@ -7,7 +7,7 @@ public class Shot : MonoBehaviour
     [SerializeField] private float _shootForce; // Сила выстрела 30
     [SerializeField] private int _maxShots; // Максимальное количество выстрелов 1
     [SerializeField] private int _timerToDestroy; // Таймер для отключения объекта лазер 7
-    [SerializeField] private MouseClickHandler _mouseClickHandler;
+    
     
     public bool CanShoot; // Флаг, позволяющий выполнять выстрел
     private int _shotsRemaining; // Количество оставшихся выстрелов
@@ -25,10 +25,6 @@ public class Shot : MonoBehaviour
 
     private void Update()
     {
-        if (CanShoot)
-        {
-            _mouseClickHandler.ClickEnabled(false);
-        }
         // Проверяем нажатие кнопки мыши и возможность стрелять
         if (Input.GetMouseButtonDown(0) && CanShoot && _shotsRemaining > 0 && !_screensController.IsAnyWindowOpened)
         {
@@ -68,7 +64,6 @@ public class Shot : MonoBehaviour
         // Проверяем, достигнуто ли максимальное количество выстрелов
         if (_shotsRemaining <= 0 && CanShoot)
         {
-            _mouseClickHandler.ClickEnabled(true);
             CanShoot = false; // Отключаем возможность выстрелов
         }
     }
@@ -88,7 +83,7 @@ public class Shot : MonoBehaviour
         {
             return;
         }
-        _mouseClickHandler.ClickEnabled(false);
+       
         CanShoot = true;
         _shotsRemaining = _maxShots;
     }

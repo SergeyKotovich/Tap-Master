@@ -32,7 +32,7 @@ public class LevelsSwitcher : MonoBehaviour
 
         
         
-            _levelsLoader.LoadLevel(CurrentLevelIndex);
+          //  _levelsLoader.LoadLevel(CurrentLevelIndex);
             PlayerPrefs.SetInt(GlobalConstants.CurrentLevel, CurrentLevelIndex);
             LevelWasChanged?.Invoke();
 
@@ -57,14 +57,14 @@ public class LevelsSwitcher : MonoBehaviour
         Debug.Log("current level" + CurrentLevelIndex);
         Debug.Log("last completed level from prefs " + PlayerPrefs.GetInt("LastCompletedLevel"));
 
-        _levelsLoader.LoadLevel(index - 1);
+      //  _levelsLoader.LoadLevel(index - 1);
         LevelWasChanged?.Invoke();
         return true;
     }
 
     public void Restart()
     {
-        _levelsLoader.LoadLevel(CurrentLevelIndex);
+     //   _levelsLoader.LoadLevel(CurrentLevelIndex);
         LevelWasRestarted?.Invoke();
     }
 
@@ -73,7 +73,7 @@ public class LevelsSwitcher : MonoBehaviour
         CurrentLevelIndex = 0;
         PlayerPrefs.SetInt(GlobalConstants.CurrentLevel, CurrentLevelIndex);
         PlayerPrefs.SetInt("LastCompletedLevel", CurrentLevelIndex);
-        _levelsLoader.LoadLevel(CurrentLevelIndex);
+     //   _levelsLoader.LoadLevel(CurrentLevelIndex);
         GameWasStartedFromBeginning?.Invoke();
     }
 

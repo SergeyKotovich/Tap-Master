@@ -1,5 +1,4 @@
 using System;
-using Cube;
 using UnityEngine;
 
 public class MouseClickHandler : MonoBehaviour
@@ -8,13 +7,13 @@ public class MouseClickHandler : MonoBehaviour
     
     [SerializeField] private Camera _camera;
 
-    private bool CanClick = true;
+    private bool _canClick = true;
 
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0)) return;
         
-        if (CanClick)
+        if (_canClick)
         {
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (!Physics.Raycast(ray, out var hit, 50f)) return;
@@ -32,7 +31,7 @@ public class MouseClickHandler : MonoBehaviour
 
     public void ClickEnabled(bool onOff)
     {
-        CanClick = onOff;
+        _canClick = onOff;
     }
     
 

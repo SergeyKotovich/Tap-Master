@@ -1,16 +1,29 @@
 using System;
 using Cube;
+using UniTaskPubSub;
 using UnityEngine;
 
-public class WonMoneyController : MonoBehaviour 
+public class WonMoneyController : IDisposable
 {
-    [SerializeField] private LevelConfig _levelConfig;
-    [SerializeField] private CubesController _cubesController;
-    public event Action <int> WinningMoneyCalculated;
+    private readonly LevelConfig _levelConfig;
+    public event Action<int> WinningMoneyCalculated;
+    private readonly IDisposable _subscriptions;
 
-    public void CalculateWonAmountMoney()
+
+    public WonMoneyController(AsyncMessageBus messageBus, LevelConfig levelConfig)
     {
-        var sumMoney = _levelConfig.LevelVictoryReward * _cubesController.CountCubsInTotal;
+        _levelConfig = levelConfig;
+        _subscriptions = messageBus.Subscribe<LevelCompleteEvent>(CalculateTotalWinnings);
+    }
+
+    private void CalculateTotalWinnings(LevelCompleteEvent data)
+    {
+        var sumMoney = _levelConfig.LevelVictoryReward * data.CubesCount;
         WinningMoneyCalculated?.Invoke(sumMoney);
+    }
+    
+    public void Dispose()
+    {
+        _subscriptions?.Dispose();
     }
 }

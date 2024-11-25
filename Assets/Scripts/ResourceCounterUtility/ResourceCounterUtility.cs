@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public static class ResourceCounterUtility
 {
-    public static IEnumerator CountResources(TextMeshProUGUI amountText, float timeUpdateResources, float startValue, float targetValue)
+    public static async UniTask CountResources(TextMeshProUGUI amountText, float timeUpdateResources, float startValue, float targetValue)
     {
         float currentTime = 0;
         
@@ -15,7 +15,7 @@ public static class ResourceCounterUtility
             currentTime += Time.deltaTime;
             amountText.text = startValue.ToString("0");
 
-            yield return null;
+            await UniTask.NextFrame();
         }
 
         startValue = targetValue;

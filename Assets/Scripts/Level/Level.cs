@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Cube;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UniTaskPubSub;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -9,26 +11,54 @@ public class Level : MonoBehaviour
     [SerializeField] private List<Cube.Cube> _level;
     [SerializeField] private LevelSpawnerConfig _levelSpawnerConfig;
     private readonly List<Vector3> _cubesTargetPositions = new();
+    private readonly float _duration = 0.3f;
+    private int _countCubes;
+    private IDisposable _subscriptions;
+    private AsyncMessageBus _messageBus;
+    private readonly int _millisecondsDelay = 1000;
 
     public void Initialize(ObstacleDetector obstacleDetector, ShakeAnimationController shakeAnimationController,
-        EffectFactory effectFactory)
+        EffectFactory effectFactory, AsyncMessageBus messageBus)
     {
         foreach (var cube in _level)
         {
-            cube.Initialize(obstacleDetector, shakeAnimationController, effectFactory);
+            cube.Initialize(obstacleDetector, shakeAnimationController, effectFactory, messageBus);
         }
+        _messageBus = messageBus;
+        _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
+        
+        _countCubes = _level.Count;
+       // Debug.Log($"count cubes {_countCubes}");
+        ScatterCubes();
+    }
+
+    private async UniTask UpdateCountCubes()
+    {
+        if (_countCubes>0)
+        {
+            _countCubes--;
+   //         Debug.Log($"count cubes {_countCubes}");
+        }
+        if(_countCubes<=0)
+        {
+            await UniTask.Delay(_millisecondsDelay);
+            var countCubesInLevel = _level.Count;
+            _messageBus.Publish(new LevelCompleteEvent(countCubesInLevel));
+            Destroy(gameObject);
+        }
+        
     }
 
     private async UniTask SetStartPositionsCubes()
     {
         for (int i = 0; i < _level.Count; i++)
         {
-            _level[i].transform.DOLocalMove(_cubesTargetPositions[i], 0.3f);
+            _level[i].transform.DOLocalMove(_cubesTargetPositions[i], _duration);
             await UniTask.NextFrame();
         }
     }
 
-    public void ScatterCubes()
+    private void ScatterCubes()
     {
         for (var i = 0; i < _level.Count; i++)
         {
@@ -55,5 +85,10 @@ public class Level : MonoBehaviour
         }
 
         SetStartPositionsCubes().Forget();
+    }
+
+    private void OnDestroy()
+    {
+        _subscriptions?.Dispose();
     }
 }

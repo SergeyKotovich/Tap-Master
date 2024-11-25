@@ -1,6 +1,8 @@
 using System;
 using DG.Tweening;
+using UniTaskPubSub;
 using UnityEngine;
+using VContainer;
 
 namespace ScreensController
 {
@@ -9,32 +11,32 @@ namespace ScreensController
         public event Action VictoryScreenLoaded;
         public event Action LevelsScreenOpened;
         
-        [SerializeField] private Canvas _victoryScreen;
-        [SerializeField] private Canvas _defeatScreen;
-        [SerializeField] private Canvas _shopScreen;
-        [SerializeField] private Canvas _settingsScreen;
-        [SerializeField] private Canvas _levelsScreen;
-        [SerializeField] private Canvas _gameIsCompletedScreen;
-        
-        [SerializeField] private MouseClickHandler _mouseClickHandler;
-        [SerializeField] private Rotator _rotator;
+        [SerializeField] private GameObject _victoryScreen;
+        [SerializeField] private GameObject _defeatScreen;
+        [SerializeField] private GameObject _shopScreen;
+        [SerializeField] private GameObject _settingsScreen;
+        [SerializeField] private GameObject _levelsScreen;
+        [SerializeField] private GameObject _gameCompletedScreen;
 
         public bool IsAnyWindowOpened;
+        private IDisposable _subscriptions;
 
-        public void ShowVictoryScreen()
+        [Inject]
+        public void Construct(AsyncMessageBus messageBus)
         {
-            HideAllScreens();
-            
-            _rotator.RotateEnabled(false);
-            _mouseClickHandler.ClickEnabled(false);
-            _victoryScreen.gameObject.SetActive(true);
+            _subscriptions = messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen());
+        }
+
+        private void ShowVictoryScreen()
+        {
+ //           HideAllScreens();
+ 
+            _victoryScreen.SetActive(true);
             VictoryScreenLoaded?.Invoke();
             IsAnyWindowOpened = true;
         }
         public void HideVictoryScreen()
         {
-            _rotator.RotateEnabled(true);
-            _mouseClickHandler.ClickEnabled(true);
             _victoryScreen.gameObject.SetActive(false);
             IsAnyWindowOpened = false;
 
@@ -43,9 +45,7 @@ namespace ScreensController
         public void ShowShopScreen()
         {
             //HideAllScreens();
-
-            _rotator.RotateEnabled(false);
-            _mouseClickHandler.ClickEnabled(false);
+            
             _shopScreen.gameObject.SetActive(true);
             IsAnyWindowOpened = true;
 
@@ -53,8 +53,6 @@ namespace ScreensController
         
         public void ShowLevelsScreen()
         {
-            _rotator.RotateEnabled(false);
-            _mouseClickHandler.ClickEnabled(false);
             _levelsScreen.gameObject.SetActive(true);
             LevelsScreenOpened?.Invoke();
             IsAnyWindowOpened = true;
@@ -64,9 +62,7 @@ namespace ScreensController
         public void ShowSettingsScreen()
         {
             HideAllScreens();
-
-            _rotator.RotateEnabled(false);
-            _mouseClickHandler.ClickEnabled(false);
+            
             _settingsScreen.gameObject.SetActive(true);
             IsAnyWindowOpened = true;
         }
@@ -74,7 +70,7 @@ namespace ScreensController
         public void ShowGameCompletedScreen()
         {
             HideAllScreens();
-            _gameIsCompletedScreen.gameObject.SetActive(true);
+            _gameCompletedScreen.gameObject.SetActive(true);
             IsAnyWindowOpened = true;
 
         }
@@ -82,15 +78,13 @@ namespace ScreensController
         public void HideGameCompletedScreen()
         {
             HideAllScreens();
-            _gameIsCompletedScreen.gameObject.SetActive(false);
+            _gameCompletedScreen.gameObject.SetActive(false);
             IsAnyWindowOpened = false;
 
         }
 
         public void HideAllScreens()
         {
-            _rotator.RotateEnabled(true);
-            _mouseClickHandler.ClickEnabled(true);
             
             _victoryScreen.gameObject.SetActive(false);
             _settingsScreen.gameObject.SetActive(false);
@@ -108,6 +102,9 @@ namespace ScreensController
 
         }
 
-
+        private void OnDestroy()
+        {
+            _subscriptions?.Dispose();
+        }
     }
 }
