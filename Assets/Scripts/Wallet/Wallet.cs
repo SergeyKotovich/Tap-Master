@@ -1,30 +1,33 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using VContainer;
 
-public class Wallet : MonoBehaviour 
+public class Wallet : IDisposable
 {
-    public event Action<int> AmountMoneyUpdated;
+    public event Action<int, int> AmountMoneyUpdated;
     public event Action MoneyWasNotEnough;
     public int Money { get; private set; }
-
-
-    private void Awake()
+    private WonMoneyController _wonMoneyController;
+    
+    public Wallet(WonMoneyController wonMoneyController)
     {
-        Money = 1000;
-        AmountMoneyUpdated?.Invoke(Money);
+        _wonMoneyController = wonMoneyController;
+        _wonMoneyController.WinningMoneyCalculated += AddMoney;
     }
-
-    public void AddMoney(int wonMoney)
+    
+    private void AddMoney(int wonMoney, int value)
     {
+        var startMoney = Money;
         Money += wonMoney;
-        AmountMoneyUpdated?.Invoke(Money);
+        var totalMoney = Money;
+        AmountMoneyUpdated?.Invoke(startMoney,totalMoney);
+        Debug.Log("ADMONEY");
     }
 
     public void SpendMoney(int price)
     {
         Money -= price;
-        AmountMoneyUpdated?.Invoke(Money);
+      //  AmountMoneyUpdated?.Invoke(Money);
     }
 
     public bool HasEnoughMoney(int price)
@@ -42,7 +45,12 @@ public class Wallet : MonoBehaviour
     public void SetDefaultMoney()
     {
         Money = 0;
-        AmountMoneyUpdated?.Invoke(Money);
+    //    AmountMoneyUpdated?.Invoke(Money);
+    }
+    
+    public void Dispose()
+    {
+        _wonMoneyController.WinningMoneyCalculated -= AddMoney;
     }
 }
 

@@ -1,23 +1,27 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public class WalletView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _moneyAmount;
-    private float _startAmountMoney;
-    private float _timeUpdateResources = 1f;
-    private int _wonMoney;
+    [SerializeField] private TextMeshProUGUI _moneyAmountText;
+    private float _timeUpdateResources = 0.5f;
+    private Wallet _wallet;
 
-    public void SetAmountMoney(int money)
+    public void Initialize(Wallet wallet)
     {
-        _wonMoney = money;
-        UpdateAmountMoney();
+        _wallet = wallet;
+        _wallet.AmountMoneyUpdated += CalculateMoney;
     }
 
-    public void UpdateAmountMoney()
+    private void CalculateMoney(int startMoney, int totalMoney)
     {
-        ResourceCounterUtility.CountResources(_moneyAmount, _timeUpdateResources, _startAmountMoney,
-            _wonMoney);
-        _startAmountMoney = _wonMoney;
+        ResourceCounterUtility.CountResources(_moneyAmountText, _timeUpdateResources, startMoney,
+            totalMoney).Forget();
+    }
+
+    private void OnDestroy()
+    {
+        _wallet.AmountMoneyUpdated -= CalculateMoney;
     }
 }

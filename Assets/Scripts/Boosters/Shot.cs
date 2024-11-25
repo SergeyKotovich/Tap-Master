@@ -17,10 +17,6 @@ public class Shot : MonoBehaviour
     private void Start()
     {
         _shotsRemaining = _maxShots; // Устанавливаем начальное количество выстрелов
-        _soundsManager = Container.Instance.SoundsManager; // звук
-        
-        // стоит ли брать ScreensController ради того что бы узнавать IsAnyWindowOpened
-        _screensController = Container.Instance.ScreensController;
     }
 
     private void Update()

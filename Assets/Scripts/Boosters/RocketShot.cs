@@ -10,12 +10,7 @@ public class RocketShot : MonoBehaviour
 
     public bool CanShoot; // Флаг, позволяющий выполнять выстрел
     private SoundsManager _soundsManager; // Звук
-
-    private void Start()
-    {
-        _soundsManager = Container.Instance.SoundsManager; // звук
-    }
-
+    
     void Update()
     {
         if (CanShoot)

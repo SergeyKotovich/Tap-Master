@@ -1248,6 +1248,7 @@ MonoBehaviour:
   - {fileID: 456251203}
   - {fileID: 1070064649}
   - {fileID: 1501376731}
+  - {fileID: 1149992400}
   _shakeAnimationController: {fileID: 487649664}
   _flyEffectPrefab: {fileID: 5737998239862026281, guid: 42665d8273ec7e64c982ceb4df495854, type: 3}
   _levelConfig: {fileID: 11400000, guid: dfdc04df2c5008e498dae76f4616de81, type: 2}
@@ -1342,7 +1343,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
@@ -1397,7 +1398,7 @@ GameObject:
   - component: {fileID: 202131434}
   - component: {fileID: 202131433}
   m_Layer: 5
-  m_Name: Count (1)
+  m_Name: 'MoneyCount '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1963,7 +1964,7 @@ GameObject:
   - component: {fileID: 275693257}
   - component: {fileID: 275693256}
   m_Layer: 5
-  m_Name: Count
+  m_Name: CubesCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4928,6 +4929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910172495}
+  - component: {fileID: 910172496}
   m_Layer: 5
   m_Name: VictoryScreen
   m_TagString: Untagged
@@ -4955,6 +4957,21 @@ RectTransform:
   m_AnchoredPosition: {x: 528, y: 982}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &910172496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910172491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1854eac83482b14886ca7fd09472444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moneyAmountText: {fileID: 202131433}
+  _cubesAmountText: {fileID: 275693256}
+  _timeUpdateResources: 0.5
 --- !u!1 &920095267
 GameObject:
   m_ObjectHideFlags: 0
@@ -5959,6 +5976,7 @@ GameObject:
   - component: {fileID: 1149992404}
   - component: {fileID: 1149992403}
   - component: {fileID: 1149992402}
+  - component: {fileID: 1149992405}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -6055,6 +6073,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1149992405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149992400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f661bdf68249278fcef6256a35cb98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _resourceCounterView: {fileID: 910172496}
+  _walletView: {fileID: 1183443276}
 --- !u!1 &1150058867
 GameObject:
   m_ObjectHideFlags: 0
@@ -6142,7 +6174,6 @@ GameObject:
   - component: {fileID: 1183443272}
   - component: {fileID: 1183443274}
   - component: {fileID: 1183443273}
-  - component: {fileID: 1183443275}
   - component: {fileID: 1183443276}
   m_Layer: 5
   m_Name: Wallet
@@ -6169,7 +6200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -230, y: -90}
+  m_AnchoredPosition: {x: -230, y: -149}
   m_SizeDelta: {x: 316.381, y: 82.927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183443273
@@ -6210,18 +6241,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183443271}
   m_CullTransparentMesh: 1
---- !u!114 &1183443275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183443271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1042473db13b95a4b861475012e53dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1183443276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6234,7 +6253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea85249f4af75b548ab772c7bb5b2a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyAmount: {fileID: 201777876}
+  _moneyAmountText: {fileID: 201777876}
 --- !u!1 &1184107159
 GameObject:
   m_ObjectHideFlags: 0
@@ -6536,7 +6555,6 @@ MonoBehaviour:
   _defaultData:
     <Money>k__BackingField: 0
     <BoostersCount>k__BackingField: 0
-  _wallet: {fileID: 1183443275}
   _inventory: {fileID: 958271114}
 --- !u!4 &1209295130
 Transform:
@@ -7799,7 +7817,6 @@ GameObject:
   - component: {fileID: 1501376732}
   - component: {fileID: 1501376735}
   - component: {fileID: 1501376734}
-  - component: {fileID: 1501376733}
   m_Layer: 5
   m_Name: WonMoney
   m_TagString: Untagged
@@ -7828,21 +7845,6 @@ RectTransform:
   m_AnchoredPosition: {x: -135.00003, y: -45.632748}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1501376733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501376731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1854eac83482b14886ca7fd09472444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moneyAmountText: {fileID: 0}
-  _cubesAmount: {fileID: 275693256}
-  _timeUpdateResources: 1
 --- !u!114 &1501376734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8329,6 +8331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsLoader: {fileID: 0}
   blackHoleController: {fileID: 237195024}
+  <CountCubsInTotal>k__BackingField: 0
+  _countGoneCubes: 0
 --- !u!4 &1626358984
 Transform:
   m_ObjectHideFlags: 0
@@ -8568,7 +8572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b99c1ce0b8f461b92b6a330187bb537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallet: {fileID: 1183443275}
   _levelsSwitcher: {fileID: 0}
   _levelsLoader: {fileID: 398286695}
 --- !u!4 &1693206549

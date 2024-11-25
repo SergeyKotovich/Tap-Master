@@ -17,7 +17,6 @@ public class BlackHoleController : MonoBehaviour
     private void Awake()
     {
         _initialScale = transform.localScale;
-        _soundsManager = Container.Instance.SoundsManager; // звук
     }
 
     public void Activate()

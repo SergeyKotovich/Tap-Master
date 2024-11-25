@@ -1,12 +1,12 @@
 using System;
-using Cube;
 using UniTaskPubSub;
 using UnityEngine;
 
 public class WonMoneyController : IDisposable
 {
+    public event Action<int, int> WinningMoneyCalculated;
+    
     private readonly LevelConfig _levelConfig;
-    public event Action<int> WinningMoneyCalculated;
     private readonly IDisposable _subscriptions;
 
 
@@ -19,7 +19,8 @@ public class WonMoneyController : IDisposable
     private void CalculateTotalWinnings(LevelCompleteEvent data)
     {
         var sumMoney = _levelConfig.LevelVictoryReward * data.CubesCount;
-        WinningMoneyCalculated?.Invoke(sumMoney);
+        WinningMoneyCalculated?.Invoke(sumMoney, data.CubesCount);
+        Debug.Log("WonMoneyController");
     }
     
     public void Dispose()

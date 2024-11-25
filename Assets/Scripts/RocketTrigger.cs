@@ -4,14 +4,9 @@ using UnityEngine;
 public class RocketTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObject;
-    private CubesController _cubesController;
     private SoundsManager _soundsManager; // Звук
 
-    private void Start()
-    {
-        _cubesController = Container.Instance.CubesController;
-        _soundsManager = Container.Instance.SoundsManager; // звук
-    }
+  
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +19,6 @@ public class RocketTrigger : MonoBehaviour
             // Инстанциируем объект в точке касания
             Instantiate(_gameObject, hitPoint, Quaternion.identity);
             
-            _cubesController.MarkCubesAsGone(1);
             Debug.Log("WasAttacked");
 
             DestroyObject(other.gameObject);

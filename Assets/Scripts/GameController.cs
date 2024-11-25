@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
 
     public void RemoveAllData()
     {
-        _levelsSwitcher.StartFromBeginning();
-        _wallet.SetDefaultMoney();
+       // _levelsSwitcher.StartFromBeginning();
+       // _wallet.SetDefaultMoney();
     }
 }

@@ -1,24 +1,31 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public static class ResourceCounterUtility
 {
-    public static async UniTask CountResources(TextMeshProUGUI amountText, float timeUpdateResources, float startValue, float targetValue)
+    public static async UniTask CountResources
+    (
+        TextMeshProUGUI amountText,
+        float timeUpdateResources,
+        float startValue,
+        float targetValue)
     {
         float currentTime = 0;
-        
+
         while (currentTime < timeUpdateResources)
         {
-             startValue = Mathf.Lerp(startValue, targetValue, currentTime / timeUpdateResources);
-
-            currentTime += Time.deltaTime;
-            amountText.text = startValue.ToString("0");
-
+            var progress = currentTime / timeUpdateResources;
+            var interpolatedValue = Mathf.Lerp(startValue, targetValue, progress);
+            
+            amountText.text = interpolatedValue.ToString("0");
+            
+            currentTime += Time.unscaledDeltaTime;
+            
             await UniTask.NextFrame();
         }
-
-        startValue = targetValue;
-        amountText.text = startValue.ToString("0");
+        
+        amountText.text = targetValue.ToString("0");
     }
 }

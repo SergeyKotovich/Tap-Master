@@ -17,8 +17,6 @@ public class SingularityCore : MonoBehaviour
         if(GetComponent<SphereCollider>()){
             GetComponent<SphereCollider>().isTrigger = true;
         }
-        
-        _soundsManager = Container.Instance.SoundsManager; // звук
     }
     
     

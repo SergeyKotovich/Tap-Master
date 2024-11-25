@@ -16,9 +16,11 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_flyEffectPrefab);
         builder.RegisterInstance(_levelConfig);
         
+        
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
         builder.Register<EffectFactory>(Lifetime.Singleton);
         builder.Register<WonMoneyController>(Lifetime.Singleton);
+        builder.Register<Wallet>(Lifetime.Singleton);
     }
 }
