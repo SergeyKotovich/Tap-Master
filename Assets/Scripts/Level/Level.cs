@@ -8,10 +8,13 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
+    [field: SerializeField] public int LevelNumber { get; private set; }
     [SerializeField] private List<Cube.Cube> _level;
     [SerializeField] private LevelSpawnerConfig _levelSpawnerConfig;
+
     private readonly List<Vector3> _cubesTargetPositions = new();
     private readonly float _duration = 0.3f;
+
     private int _countCubes;
     private IDisposable _subscriptions;
     private AsyncMessageBus _messageBus;
@@ -24,29 +27,32 @@ public class Level : MonoBehaviour
         {
             cube.Initialize(obstacleDetector, shakeAnimationController, effectFactory, messageBus);
         }
+
         _messageBus = messageBus;
         _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
-        
         _countCubes = _level.Count;
-       // Debug.Log($"count cubes {_countCubes}");
+
         ScatterCubes();
     }
 
     private async UniTask UpdateCountCubes()
     {
-        if (_countCubes>0)
+        if (_countCubes > 0)
         {
             _countCubes--;
-   //         Debug.Log($"count cubes {_countCubes}");
         }
-        if(_countCubes<=0)
+
+        if (_countCubes <= 0)
         {
             await UniTask.Delay(_millisecondsDelay);
             var countCubesInLevel = _level.Count;
             _messageBus.Publish(new LevelCompleteEvent(countCubesInLevel));
-            Destroy(gameObject);
         }
-        
+    }
+
+    public void DestroyLevel()
+    {
+        Destroy(gameObject);
     }
 
     private async UniTask SetStartPositionsCubes()

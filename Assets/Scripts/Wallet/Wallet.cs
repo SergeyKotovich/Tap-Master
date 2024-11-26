@@ -21,7 +21,6 @@ public class Wallet : IDisposable
         Money += wonMoney;
         var totalMoney = Money;
         AmountMoneyUpdated?.Invoke(startMoney,totalMoney);
-        Debug.Log("ADMONEY");
     }
 
     public void SpendMoney(int price)

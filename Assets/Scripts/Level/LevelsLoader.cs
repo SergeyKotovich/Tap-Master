@@ -24,15 +24,16 @@ public class LevelsLoader : MonoBehaviour
     }
 
 
-    public void LoadLevel(int indexLevel)
+    public Level LoadLevel(int indexLevel)
     {
         if (indexLevel >= _levels.Count)
         {
             Debug.Log("Levels is over");
-            return;
+            return null;
         }
 
         var currentLevel = Instantiate(_levels[indexLevel], _parentLevel);
         currentLevel.Initialize(_obstacleDetector, _shakeAnimationController, _effectFactory, _messageBus);
+        return currentLevel;
     }
 }

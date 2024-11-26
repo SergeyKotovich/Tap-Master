@@ -1,7 +1,6 @@
 using System;
 using DefaultNamespace.Inventory;
 using DefaultNamespace.Items;
-using DefaultNamespace.Player;
 using UnityEngine;
 
 namespace Boosters

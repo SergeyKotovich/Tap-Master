@@ -10,12 +10,7 @@ namespace DefaultNamespace.Shop
         [SerializeField] private Button _boostersButton;
 
         private Button _selectedButton;
-        private void Awake()
-        {
-//           _skinsButton.onClick.AddListener(() => OnButtonClick(_skinsButton));
-//           _boostersButton.onClick.AddListener(() => OnButtonClick(_boostersButton));
-        }
-        
+
         private void OnButtonClick(Button clickedButton)
         {
             if (_selectedButton != null)

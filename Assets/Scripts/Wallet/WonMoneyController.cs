@@ -20,7 +20,6 @@ public class WonMoneyController : IDisposable
     {
         var sumMoney = _levelConfig.LevelVictoryReward * data.CubesCount;
         WinningMoneyCalculated?.Invoke(sumMoney, data.CubesCount);
-        Debug.Log("WonMoneyController");
     }
     
     public void Dispose()

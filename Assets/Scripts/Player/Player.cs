@@ -1,35 +1,27 @@
-using System;
-using System.Collections.Generic;
 using DefaultNamespace.Inventory;
-using DefaultNamespace.Items;
 using UnityEngine;
 
-namespace DefaultNamespace.Player
+
+public class Player : MonoBehaviour
 {
-    public class Player : MonoBehaviour
+    [SerializeField] private DefaultData _defaultData;
+
+    [SerializeField] private Wallet _wallet;
+    [SerializeField] private Inventory _inventory;
+
+
+    private void Awake()
     {
-        [SerializeField] private DefaultData _defaultData;
-        
-        [SerializeField] private Wallet _wallet;
-        [SerializeField] private Inventory _inventory;
+        _defaultData = new DefaultData();
+    }
 
-        private PlayerDataSaver _playerDataSaver;
+    public void TryBuy(ItemsType itemsType)
+    {
+        var item = _inventory.GetItemByType(itemsType);
 
-        private void Awake()
-        {
-            _defaultData = new DefaultData();
-            _playerDataSaver = new PlayerDataSaver();
-        }
+        if (!_wallet.HasEnoughMoney(item.Price)) return;
 
-        public void TryBuy(ItemsType itemsType)
-        {
-            var item = _inventory.GetItemByType(itemsType);
-            
-            if (!_wallet.HasEnoughMoney(item.Price)) return;
-            
-            _wallet.SpendMoney(item.Price);
-            _inventory.AddNewItem(item);
-        }
-
+        _wallet.SpendMoney(item.Price);
+        _inventory.AddNewItem(item);
     }
 }

@@ -6,5 +6,4 @@ public struct LevelCompleteEvent
     {
         CubesCount = cubesCount;
     }
-    
 }

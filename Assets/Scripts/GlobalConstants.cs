@@ -1,8 +1,4 @@
-namespace DefaultNamespace
+public static class GlobalConstants
 {
-    public static class GlobalConstants
-    {
-        public const string CurrentLevel = "CurrentLevel";
-
-    }
+    public const string CurrentLevel = "CurrentLevel";
 }
