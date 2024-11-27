@@ -2119,7 +2119,7 @@ GameObject:
   - component: {fileID: 285450429}
   - component: {fileID: 285450431}
   m_Layer: 0
-  m_Name: RocketsSpawner
+  m_Name: Rockets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2230,7 +2230,7 @@ Transform:
   m_GameObject: {fileID: 285450427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.94406, y: 6.911074, z: -110.31827}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2248,11 +2248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8823f2ab052774098c3a12a6ef7af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectToShoot: {fileID: 5519800557993458569, guid: 71efd3bc92d157b4ca6d168361a57c81, type: 3}
-  _timerToDestroy: 10
-  _moveSpeed: 5
-  _mouseClickHandler: {fileID: 977095226}
-  CanShoot: 0
+  _rocketsPrefab: {fileID: -4708711048362464446, guid: 71efd3bc92d157b4ca6d168361a57c81, type: 3}
 --- !u!1 &313250696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4400,7 +4396,7 @@ Transform:
   m_GameObject: {fileID: 771181600}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07512295, y: 1.4162841, z: 5.8891325}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6919,7 +6915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303209379}
   m_Layer: 0
-  m_Name: BackGroundSaturn
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8537,7 +8533,7 @@ Transform:
   m_GameObject: {fileID: 1557201496}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8089371, y: -8.327358, z: 89.42914}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9484,7 +9480,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1723634210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 285450431}
+        m_TargetAssemblyTypeName: RocketShot, Assembly-CSharp
+        m_MethodName: ActivateRocket
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1723634210
 MonoBehaviour:
   m_ObjectHideFlags: 0
