@@ -8,7 +8,7 @@ public class LaserTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Проверяем, срабатывает ли триггер на объекте, который движется
-        if (other.gameObject.CompareTag("Cube"))
+        if (other.gameObject.CompareTag("CubeMotionHandler"))
         {
             Debug.Log("WasAttacked");
 

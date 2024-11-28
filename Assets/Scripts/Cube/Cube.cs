@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Cube
 {
-    public class Cube : MonoBehaviour
+    public class Cube : MonoBehaviour, ICubeDestroyer
     {
         public bool IsMoving { get; private set; }
 
@@ -87,6 +87,12 @@ namespace Cube
             _obstacleDetector.FindObstacleNeighbours();
 
             return _hit.collider == null || _hit.transform.GetComponent<Cube>()?.IsMoving == true;
+        }
+
+        public void DestroyCube()
+        {
+            Destroy(gameObject);
+            _messageBus.Publish(new CubeWasDestroyedEvent());
         }
     }
 }

@@ -5,28 +5,28 @@ using UnityEngine.Pool;
 
 public class RocketShot : MonoBehaviour
 {
-    [SerializeField] private Rockets _rocketsPrefab;
+    [SerializeField] private RocketsPhysicsHandler _rocketsPrefab;
 
-    private SoundsManager _soundsManager;
-    private ObjectPool<Rockets> _rocketsPool;
+    private int _delay = 7000;
+    private ObjectPool<RocketsPhysicsHandler> _rocketsPool;
 
     private void Awake()
     {
-        _rocketsPool = new ObjectPool<Rockets>(Create, Get, Release);
+        _rocketsPool = new ObjectPool<RocketsPhysicsHandler>(Create, Get, Release);
     }
 
-    private void Release(Rockets rockets)
+    private void Release(RocketsPhysicsHandler rocketsPhysicsHandler)
     {
-        rockets.gameObject.SetActive(false);
+        rocketsPhysicsHandler.gameObject.SetActive(false);
     }
 
-    private void Get(Rockets rockets)
+    private void Get(RocketsPhysicsHandler rocketsPhysicsHandler)
     {
-        rockets.gameObject.SetActive(true);
-        rockets.transform.position = transform.position;
+        rocketsPhysicsHandler.gameObject.SetActive(true);
+        rocketsPhysicsHandler.transform.position = transform.position;
     }
 
-    private Rockets Create()
+    private RocketsPhysicsHandler Create()
     {
         return Instantiate(_rocketsPrefab);
     }
@@ -41,7 +41,7 @@ public class RocketShot : MonoBehaviour
     {
         var rockets = _rocketsPool.Get();
         rockets.LaunchRockets();
-        await UniTask.Delay(7000);
+        await UniTask.Delay(_delay);
         _rocketsPool.Release(rockets);
     }
 }

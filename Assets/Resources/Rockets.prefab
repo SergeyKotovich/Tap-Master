@@ -91089,14 +91089,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4807322682634138699}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.40421385, y: -0.580182, z: -0.580182, w: -0.40421385}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0.129, y: 0.757, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1313325972866646285}
   m_Father: {fileID: 6200844932277690078}
-  m_LocalEulerAnglesHint: {x: -159.73, y: -90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!33 &2683534108750926176
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -91208,6 +91208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosiveSmoke: {fileID: 6898237954281937726}
+  _startPosition: {x: 0.129, y: 0.757, z: -10}
 --- !u!1 &5519800557993458569
 GameObject:
   m_ObjectHideFlags: 0
@@ -91217,7 +91218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6200844932277690078}
-  - component: {fileID: -4708711048362464446}
+  - component: {fileID: 1045381768307419095}
   m_Layer: 0
   m_Name: Rockets
   m_TagString: Untagged
@@ -91246,7 +91247,7 @@ Transform:
   - {fileID: 2649443192816731893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 239.14}
---- !u!114 &-4708711048362464446
+--- !u!114 &1045381768307419095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91259,12 +91260,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationSpeed: 40
-  _moveSpeed: 20
+  _moveSpeed: 25
   _rockets:
   - {fileID: 4158763459318611451}
   - {fileID: 945997179028592297}
   - {fileID: 8229787459458546159}
-  _timeToRelease: 0
 --- !u!1 &5745279539075102328
 GameObject:
   m_ObjectHideFlags: 0
@@ -91294,14 +91294,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5745279539075102328}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25346205, y: -0.66011894, z: -0.66011894, w: 0.25346205}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: -0.533, y: -0.156, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4983567304202703059}
   m_Father: {fileID: 6200844932277690078}
-  m_LocalEulerAnglesHint: {x: -47.99, y: -90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!33 &1182001047918297910
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -91413,6 +91413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosiveSmoke: {fileID: 1849241552096626121}
+  _startPosition: {x: -0.533, y: -0.156, z: -10}
 --- !u!1 &6529471213605098176
 GameObject:
   m_ObjectHideFlags: 0
@@ -91442,14 +91443,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6529471213605098176}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.67901295, y: -0.19733588, z: -0.19733588, w: 0.67901295}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0.545, y: -0.215, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7396922477890979988}
   m_Father: {fileID: 6200844932277690078}
-  m_LocalEulerAnglesHint: {x: 57.59, y: -90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -90}
 --- !u!33 &2778665714236411809
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -91561,6 +91562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosiveSmoke: {fileID: 1822287980065550226}
+  _startPosition: {x: 0.545, y: -0.215, z: -10}
 --- !u!1 &6898237954281937726
 GameObject:
   m_ObjectHideFlags: 0

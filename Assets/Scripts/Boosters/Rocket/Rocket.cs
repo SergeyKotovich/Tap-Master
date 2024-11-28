@@ -1,27 +1,32 @@
-using System;
+using Cube;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
     [SerializeField] private GameObject _explosiveSmoke;
-    private SoundsManager _soundsManager;
-    private Vector3 _startPosition;
+    [SerializeField] private Vector3 _startPosition;
+    private readonly int _delay = 5000;
 
-    private void Awake()
-    {
-        _startPosition = transform.position;
-    }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Cube"))
+        if (other.gameObject.CompareTag(GlobalConstants.CUBE_TAG))
         {
+            other.GetComponent<ICubeDestroyer>().DestroyCube();
             var hitPoint = other.ClosestPoint(transform.position);
             _explosiveSmoke.transform.position = hitPoint;
             _explosiveSmoke.SetActive(true);
 
             gameObject.SetActive(false);
-            transform.position = _startPosition;
+            SetDefaultParameters().Forget();
         }
+    }
+
+    private async UniTask SetDefaultParameters()
+    {
+        await UniTask.Delay(_delay);
+        transform.position = _startPosition;
+        _explosiveSmoke.SetActive(false);
     }
 }

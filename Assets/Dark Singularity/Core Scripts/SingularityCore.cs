@@ -30,7 +30,7 @@ public class SingularityCore : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Cube"))
+        if (other.CompareTag(GlobalConstants.CUBE_TAG))
         {
             Destroy(other.gameObject);
             _countCubesDestroy++;
