@@ -1,6 +1,4 @@
 using System;
-using DefaultNamespace.Inventory;
-using DefaultNamespace.Items;
 using UnityEngine;
 
 

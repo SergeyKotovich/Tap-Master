@@ -1,5 +1,5 @@
-namespace DefaultNamespace.Inventory
-{
+
+
     public enum ItemsType
     {
         BlackHole,
@@ -7,4 +7,4 @@ namespace DefaultNamespace.Inventory
         Rocket,
         Moves
     }
-}
+

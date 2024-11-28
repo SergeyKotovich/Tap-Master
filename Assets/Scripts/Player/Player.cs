@@ -1,4 +1,3 @@
-using DefaultNamespace.Inventory;
 using UnityEngine;
 
 

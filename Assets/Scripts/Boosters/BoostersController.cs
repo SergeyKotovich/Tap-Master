@@ -1,6 +1,4 @@
 using System;
-using DefaultNamespace.Inventory;
-using DefaultNamespace.Items;
 using UnityEngine;
 
 
@@ -8,7 +6,7 @@ public class BoostersController : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
     [SerializeField] private BlackHoleController blackHoleController;
-    [SerializeField] private Shot _shot;
+    [SerializeField] private LaserShot _laserShot;
 
     public void TryActivateBooster(string type)
     {
@@ -34,11 +32,10 @@ public class BoostersController : MonoBehaviour
 
                 break;
             case ItemsType.Laser:
-                if (!_shot.CanShoot)
-                {
-                    _shot.ActiveShot();
+               
+                    _laserShot.Shot();
                     _inventory.SpendItem(booster.Type);
-                }
+                
 
                 break;
         }

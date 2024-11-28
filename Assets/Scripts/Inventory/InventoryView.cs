@@ -1,4 +1,3 @@
-using DefaultNamespace.Inventory;
 using TMPro;
 using UnityEngine;
 

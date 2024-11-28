@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Cube
 {
-    public class Cube : MonoBehaviour, ICubeDestroyer
+    public class Cube : MonoBehaviour, ICubeDestroyer , IMover
     {
         public bool IsMoving { get; private set; }
 
