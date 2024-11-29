@@ -91,6 +91,7 @@ namespace Cube
 
         public void DestroyCube()
         {
+            transform.DOKill();
             Destroy(gameObject);
             _messageBus.Publish(new CubeWasDestroyedEvent());
         }

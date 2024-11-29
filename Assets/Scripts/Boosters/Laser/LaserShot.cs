@@ -1,4 +1,6 @@
+using System;
 using Cysharp.Threading.Tasks;
+using UniTaskPubSub;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -10,6 +12,12 @@ public class LaserShot : MonoBehaviour
     private bool _isActive;
 
     private ObjectPool<Rigidbody> _laserPool;
+    private IDisposable _subscriptions;
+
+    public void Initialize(AsyncMessageBus messageBus)
+    {
+        _subscriptions = messageBus.Subscribe<LaserTargetPositionSet>(messageData => Shot(messageData.TargetPosition));
+    }
 
     private void Awake()
     {
@@ -33,36 +41,18 @@ public class LaserShot : MonoBehaviour
         return Instantiate(_laserPrefab, transform.position, Quaternion.identity);
     }
 
-    private void Update()
-    {
-        if (!_isActive)
-        {
-            return;
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out var hit))
-            {
-                var laser = _laserPool.Get();
-                var shootDirection = (hit.point - transform.position).normalized;
-                laser.AddForce(shootDirection * _shootForce, ForceMode.Impulse);
-                TimerToRelease(laser).Forget();
-                _isActive = false;
-            }
-        }
-    }
-    
-    public void Shot()
+    private async UniTask Shot(Vector3 targetPosition)
     {
-        _isActive = true;
-        
-    }
-
-    private async UniTask TimerToRelease(Rigidbody laser)
-    {
+        var laser = _laserPool.Get();
+        var shootDirection = (targetPosition - transform.position).normalized;
+        laser.AddForce(shootDirection * _shootForce, ForceMode.Impulse);
         await UniTask.Delay(_delay);
         _laserPool.Release(laser);
+    }
+    
+    private void OnDestroy()
+    {
+        _subscriptions.Dispose();
     }
 }

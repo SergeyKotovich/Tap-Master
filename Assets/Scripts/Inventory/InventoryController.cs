@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
-    [SerializeField] private BlackHoleController blackHoleController;
+   // [SerializeField] private BlackHoleController _raycastCollector;
 
     public void TryActivateBooster(string type)
     {
@@ -15,8 +15,6 @@ public class InventoryController : MonoBehaviour
 
             if (item.Count <= 0) return;
 
-            if (blackHoleController.IsActive) return;
-            blackHoleController.Activate();
             _inventory.SpendItem(boosterType);
         }
     }

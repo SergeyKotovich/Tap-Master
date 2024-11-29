@@ -1,29 +1,50 @@
 using Cube;
+using JetBrains.Annotations;
+using UniTaskPubSub;
 using UnityEngine;
+using VContainer;
 
 public class MouseClickHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
     private bool _canClick = true;
+    private bool _isLaserActive;
+    private AsyncMessageBus _messageBus;
+
+    [Inject]
+    public void Construct(AsyncMessageBus messageBus)
+    {
+        _messageBus = messageBus;
+    }
 
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0)) return;
-        
+
         if (_canClick)
         {
             var ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (!Physics.Raycast(ray, out var hit, 50f)) return;
+            if (!Physics.Raycast(ray, out var hit))
+            {
+                return;
+            }
 
             if (hit.transform.CompareTag(GlobalConstants.CUBE_TAG))
             {
+                if (_isLaserActive)
+                {
+                    _messageBus.Publish(new LaserTargetPositionSet(hit.point));
+                    _isLaserActive = false;
+                    return;
+                }
+
                 var cube = hit.transform.GetComponent<IMover>();
                 if (cube.IsMoving)
                 {
                     return;
                 }
-                
+
                 cube.TryMove();
             }
         }
@@ -33,6 +54,10 @@ public class MouseClickHandler : MonoBehaviour
     {
         _canClick = onOff;
     }
-    
 
+    [UsedImplicitly]
+    public void EnableLaser()
+    {
+        _isLaserActive = true;
+    }
 }

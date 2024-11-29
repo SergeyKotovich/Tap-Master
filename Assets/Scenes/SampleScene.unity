@@ -283,9 +283,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1899106621}
-        m_TargetAssemblyTypeName: LaserShot, Assembly-CSharp
-        m_MethodName: Shot
+      - m_Target: {fileID: 977095226}
+        m_TargetAssemblyTypeName: MouseClickHandler, Assembly-CSharp
+        m_MethodName: EnableLaser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1123,6 +1123,8 @@ MonoBehaviour:
   - {fileID: 1501376731}
   - {fileID: 1149992400}
   - {fileID: 1693206547}
+  - {fileID: 1557201496}
+  - {fileID: 977095225}
   _shakeAnimationController: {fileID: 487649664}
   _flyEffectPrefab: {fileID: 5737998239862026281, guid: 42665d8273ec7e64c982ceb4df495854, type: 3}
   _levelConfig: {fileID: 11400000, guid: dfdc04df2c5008e498dae76f4616de81, type: 2}
@@ -1545,9 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d8e38de319c2a4db9d0cbe8586d1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsActive: 0
-  _levelPosition: {fileID: 1070064651}
-  _rotator: {fileID: 1070064650}
+  _targetPosition: {fileID: 1070064651}
 --- !u!4 &237195027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
@@ -1908,7 +1908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 958271114}
-  blackHoleController: {fileID: 237195024}
 --- !u!1 &275693254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,7 +2659,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 771181601}
+  m_Father: {fileID: 1557201498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &398286695
 MonoBehaviour:
@@ -2675,6 +2674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels:
+  - {fileID: 4902294881818000852, guid: 36c28db2d3f0b5541b2d8100d2699be1, type: 3}
   - {fileID: 7637276576155852245, guid: dd86287e0419943a0a5750aa0a409110, type: 3}
   - {fileID: 1760375916728156248, guid: 8f7146d4133f64e9ba7c0dffbdc894de, type: 3}
   - {fileID: 4645587154446824279, guid: b0fbc1f2cf0d54f0e8023c3b25824b3f, type: 3}
@@ -2688,7 +2688,6 @@ MonoBehaviour:
   - {fileID: 1799280446308597111, guid: 3cccaa921a5e27040a0c83c054b41fd3, type: 3}
   - {fileID: 1430443316376492669, guid: 6ff05ecdd899be147ace32e4447fb65d, type: 3}
   - {fileID: 3066179461916548766, guid: 6bf75169694098a46bd5511f091a9d4f, type: 3}
-  - {fileID: 4902294881818000852, guid: 36c28db2d3f0b5541b2d8100d2699be1, type: 3}
   - {fileID: 5199141603372766874, guid: faf3fc5d340e09b439cc6779f0a27a1b, type: 3}
   - {fileID: 5193319930726902493, guid: 2650c1391af54854ca3e74527dbecdfc, type: 3}
   _parentLevel: {fileID: 1070064651}
@@ -4116,27 +4115,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.88406
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33.511074
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.318268
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4166,6 +4165,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1535756534693798852, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1538102051281877180, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_Name
       value: Dark Singularity
@@ -4178,9 +4181,21 @@ PrefabInstance:
       propertyPath: GRAVITY_PULL
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1539949048050087411, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
+      propertyPath: m_Radius
+      value: 0.23358336
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539949048050087411, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539949048050087411, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1539949049098741392, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 1539949049098741393, guid: c19ea996263106d48ad07abd2d729ed1, type: 3}
       propertyPath: _blackHole
@@ -4413,7 +4428,6 @@ Transform:
   m_Children:
   - {fileID: 487649663}
   - {fileID: 1557201498}
-  - {fileID: 398286694}
   - {fileID: 1693206549}
   - {fileID: 456251205}
   - {fileID: 364588645}
@@ -8261,8 +8275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventory: {fileID: 958271114}
-  blackHoleController: {fileID: 237195024}
-  _laserShot: {fileID: 0}
+  _laserShot: {fileID: 1899106621}
 --- !u!4 &1557201498
 Transform:
   m_ObjectHideFlags: 0
@@ -8279,6 +8292,7 @@ Transform:
   - {fileID: 237195027}
   - {fileID: 1899106622}
   - {fileID: 285450430}
+  - {fileID: 398286694}
   m_Father: {fileID: 771181601}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1580996637
@@ -9686,7 +9700,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1786827183}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237195024}
+        m_TargetAssemblyTypeName: BlackHoleController, Assembly-CSharp
+        m_MethodName: EnableBlackHole
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1786827183
 MonoBehaviour:
   m_ObjectHideFlags: 0

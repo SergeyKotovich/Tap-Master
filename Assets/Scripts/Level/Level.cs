@@ -31,7 +31,10 @@ public class Level : MonoBehaviour
         _messageBus = messageBus;
         _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
         _countCubes = _level.Count;
-
+        if (LevelNumber>6)
+        {
+            return;
+        }
         ScatterCubes();
     }
 
