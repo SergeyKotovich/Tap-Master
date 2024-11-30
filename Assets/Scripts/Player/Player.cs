@@ -14,13 +14,13 @@ public class Player : MonoBehaviour
         _defaultData = new DefaultData();
     }
 
-    public void TryBuy(ItemsType itemsType)
-    {
-        var item = _inventory.GetItemByType(itemsType);
-
-        if (!_wallet.HasEnoughMoney(item.Price)) return;
-
-        _wallet.SpendMoney(item.Price);
-        _inventory.AddNewItem(item);
-    }
+  //  public void TryBuy(BoostersType boostersType)
+  //  {
+  //      var item = _inventory.GetItemByType(boostersType);
+//
+  //      if (!_wallet.HasEnoughMoney(item.Price)) return;
+//
+  //      _wallet.SpendMoney(item.Price);
+  //      _inventory.AddNewItem(item);
+  //  }
 }
