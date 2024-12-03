@@ -14,7 +14,7 @@ namespace BlackHole
         private readonly Vector3 _endValueForRotation = new(0, 360, 0);
         private readonly float _duration = 2f;
         private readonly int _millisecondsDelay = 2000;
-        private readonly Vector3 _startScale = new(7,7,7);
+        private readonly Vector3 _startScale = new(20,20,20);
         
         private Vector3 _direction;
         private Vector3[] _offsets;
