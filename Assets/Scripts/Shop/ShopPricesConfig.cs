@@ -9,5 +9,6 @@ public class ShopPricesConfig : ScriptableObject
     [field: SerializeField] public int CostUnlockRockets { get; private set; }
     [field: SerializeField] public int CostUnlockLaser { get; private set; }
     [field: SerializeField] public int CostUnlockBlackHole { get; private set; }
+    [field: SerializeField] public int CostStandardSkin { get; private set; }
     
 }

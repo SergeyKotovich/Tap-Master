@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShopView : MonoBehaviour
 {
     [SerializeField] private List<BoosterShopView> _boostersShopView;
+    [SerializeField] private SkinsShopView _skinsShopView;
     [SerializeField] private ShopPricesConfig _shopPricesConfig;
 
     private void Awake()
@@ -12,5 +13,7 @@ public class ShopView : MonoBehaviour
         {
             boosterShopView.Initialize(_shopPricesConfig);
         }
+
+        _skinsShopView.Initialize(_shopPricesConfig);
     }
 }

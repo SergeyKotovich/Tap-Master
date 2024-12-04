@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UniTaskPubSub;
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer;
 
 public class LaserShot : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class LaserShot : MonoBehaviour
     private ObjectPool<Rigidbody> _laserPool;
     private IDisposable _subscriptions;
 
-    public void Initialize(AsyncMessageBus messageBus)
+    [Inject]
+    public void Construct(AsyncMessageBus messageBus)
     {
         _subscriptions = messageBus.Subscribe<LaserTargetPositionSet>(messageData => Shot(messageData.TargetPosition));
     }
@@ -50,7 +52,7 @@ public class LaserShot : MonoBehaviour
         await UniTask.Delay(_delay);
         _laserPool.Release(laser);
     }
-    
+
     private void OnDestroy()
     {
         _subscriptions.Dispose();

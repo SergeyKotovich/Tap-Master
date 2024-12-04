@@ -1,17 +1,27 @@
-using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
+using VContainer;
 
 
 public class ShopController : MonoBehaviour
 {
     [SerializeField] private ShopPricesConfig _shopPricesConfig;
-
-    private List<IBooster> _boosters = new();
-
-    private void Awake()
+    [SerializeField] private SkinsShopController _skinsShopController;
+    [SerializeField] private BoostersShopController _boostersShopController;
+    
+    [Inject]
+    public void Construct(IMoneyHandler moneyHandler)
     {
-        _boosters.Add(new BlackHoleBooster(BoostersType.BlackHole, _shopPricesConfig.CostBlackHole));
-        _boosters.Add(new LaserBooster(BoostersType.Laser, _shopPricesConfig.CostLaser));
-        _boosters.Add(new RocketBooster(BoostersType.Rocket, _shopPricesConfig.CostRockets));
+        _skinsShopController.Initialize(moneyHandler,_shopPricesConfig);
+        _boostersShopController.Initialize(_shopPricesConfig);
     }
+
+    [UsedImplicitly]
+    public void UseSkin(Skin skin)
+    {
+        _skinsShopController.TryUseSkin(skin);
+    }
+    
+
+    
 }
