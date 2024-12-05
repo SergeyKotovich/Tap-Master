@@ -1,15 +1,26 @@
 using System;
+using UnityEngine;
 
-
-public class LaserBooster : IBooster
+public class LaserBooster : Booster
 {
-    public event Action<int, IBooster> WasBought;
-    public BoostersType Type { get; }
-    public int Price { get; }
-
-    public LaserBooster(BoostersType type, int cost)
+    public bool WasBought { get; private set; }
+    public BoostersType Type { get; private set; }
+    public int Price { get; private set; }
+    public int Count { get; private set; }
+    
+    public override void Initialize(ShopConfig shopConfig)
     {
-        Type = type;
-        Price = cost;
+        Type = BoostersType.Laser;
+        Price = shopConfig.CostLaser;
+    }
+    
+    public override void AddBooster()
+    {
+        Count++;
+    }
+
+    public override void SpendBooster()
+    {
+        Count--;
     }
 }

@@ -21,6 +21,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
         builder.Register<EffectFactory>(Lifetime.Singleton);
         builder.Register<WonMoneyController>(Lifetime.Singleton);
+        builder.Register<Inventory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Wallet>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
     }
 }

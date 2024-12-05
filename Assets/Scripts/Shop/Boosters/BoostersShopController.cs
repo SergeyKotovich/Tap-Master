@@ -3,20 +3,30 @@ using UnityEngine;
 
 public class BoostersShopController : MonoBehaviour
 {
-    private readonly List<IBooster> _boosters = new();
-    private ShopConfig _shopConfig;
+    [SerializeField] private List<Booster> _boosters;
 
-    public void Initialize(ShopConfig shopConfig)
+    private IMoneyHandler _moneyHandler;
+
+    public void Initialize(ShopConfig shopConfig, IMoneyHandler moneyHandler, IInventoryHandler inventory)
     {
-        _shopConfig = shopConfig;
+        _moneyHandler = moneyHandler;
         
-        _boosters.Add(new BlackHoleBooster(BoostersType.BlackHole, _shopConfig.CostBlackHole));
-        _boosters.Add(new LaserBooster(BoostersType.Laser, _shopConfig.CostLaser));
-        _boosters.Add(new RocketBooster(BoostersType.Rocket, _shopConfig.CostRockets));
-        
+        inventory.Initialize(_boosters);
+
         foreach (var booster in _boosters)
         {
-          
+            booster.Initialize(shopConfig);
         }
+    }
+
+    public bool TryBuyBooster(Booster booster)
+    {
+        if (_moneyHandler.HasEnoughMoney(booster.Price))
+        {
+            _moneyHandler.SpendMoney(booster.Price);
+            return true;
+        }
+
+        return false;
     }
 }

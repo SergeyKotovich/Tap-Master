@@ -21,6 +21,6 @@ public abstract class BoosterShopView : MonoBehaviour
 
     public virtual void CanUnlockBooster(int currentLevel)
     {
-        _boosterButton.interactable = true;
+        _boosterButton.gameObject.SetActive(true); 
     }
 }

@@ -6,40 +6,34 @@ public class InventoryView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _blackHoleCount;
     [SerializeField] private TextMeshProUGUI _laserCount;
+    [SerializeField] private TextMeshProUGUI _rocketCount;
 
-    [SerializeField] private Inventory _inventory;
+    private IInventoryHandler _inventory;
 
-    private void Start()
+    public void Initialize(IInventoryHandler inventory)
     {
-        UpdateInventoryView();
-//        _inventory.ItemsWereChanged += UpdateInventoryView;
+        _inventory = inventory;
+        UpdateCountBoosters();
     }
 
-    public void UpdateInventoryView()
-    {
-        UpdateItemCountView(BoostersType.BlackHole, _blackHoleCount);
-        UpdateItemCountView(BoostersType.Laser, _laserCount);
-    }
+   
 
-    private void UpdateItemCountView(BoostersType boosterType, TextMeshProUGUI countText)
+    private void UpdateCountBoosters ()
     {
-        //       var item = _inventory.GetItemByType(boosterType);
-
-        //      if (item == null || item.Count <= 0)
-        //      {
-        //          countText.text = " ";
-        //          countText.transform.parent.gameObject.SetActive(false);
-        //      }
-        //      else
-        //      {
-        //          countText.transform.parent.gameObject.SetActive(true);
-        //          countText.text = item.Count.ToString();
-        //      }
-        //  }
-//
-        //  private void OnDestroy()
-        //  {
-        //      _inventory.ItemsWereChanged -= UpdateInventoryView;
-        //  }
+        foreach (var booster in _inventory.Boosters)
+        {
+            switch (booster.Type)
+            {
+                case BoostersType.Laser:
+                    _laserCount.text = booster.Count.ToString();
+                    break;
+                case BoostersType.Rocket:
+                    _rocketCount.text = booster.Count.ToString();
+                    break;
+                case BoostersType.BlackHole:
+                    _blackHoleCount.text = booster.Count.ToString();
+                    break;
+            }
+        }
     }
 }

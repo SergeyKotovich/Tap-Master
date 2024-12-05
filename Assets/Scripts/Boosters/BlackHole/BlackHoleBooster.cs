@@ -1,18 +1,25 @@
-using System;
-
-
-public class BlackHoleBooster : IBooster
+public class BlackHoleBooster : Booster
 {
-    public event Action<int, IBooster> WasBought;
+    public bool WasBought { get; private set; }
     
-    public BoostersType Type { get; }
-    public int Price { get; }
-   
-
-    public BlackHoleBooster(BoostersType type, int cost)
+    public BoostersType Type { get; private set; }
+    public int Price { get; private set; }
+    public int Count { get; private set; }
+    
+    public override void Initialize(ShopConfig shopConfig)
     {
-        Type = type;
-        Price = cost;
+        Type = BoostersType.BlackHole;
+        Price = shopConfig.CostBlackHole;
     }
+    public override void AddBooster()
+    {
+        Count++;
+    }
+
+    public override void SpendBooster()
+    {
+        Count--;
+    }
+    
 }
 
