@@ -6,7 +6,7 @@ using DG.Tweening;
 using UniTaskPubSub;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+public class Level : MonoBehaviour, ILevelProvider
 {
     [field: SerializeField] public int LevelNumber { get; private set; }
     [SerializeField] private List<Cube.Cube> _level;

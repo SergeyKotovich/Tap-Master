@@ -7,12 +7,12 @@ public class SkinsShopController : MonoBehaviour
     [SerializeField] private List<Skin> _skins;
     private IMoneyHandler _moneyHandler;
 
-    public void Initialize(IMoneyHandler moneyHandler, ShopPricesConfig shopPricesConfig)
+    public void Initialize(IMoneyHandler moneyHandler, ShopConfig shopConfig)
     {
         _moneyHandler = moneyHandler;
         foreach (var skin in _skins)
         {
-            skin.Initialize(shopPricesConfig);
+            skin.Initialize(shopConfig);
         }
     }
     

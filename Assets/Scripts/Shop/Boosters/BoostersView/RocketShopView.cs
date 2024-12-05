@@ -1,8 +1,22 @@
 public class RocketShopView : BoosterShopView
 {
-    public override void Initialize(ShopPricesConfig shopPricesConfig)
+    private ShopConfig _shopConfig;
+
+    public override void Initialize(ShopConfig shopConfig)
     {
-        _costBuyingBooster.text = shopPricesConfig.CostRockets.ToString();
-        _costUnlockBooster.text = shopPricesConfig.CostUnlockRockets.ToString();
+        _shopConfig = shopConfig;
+        _costBuyingBooster.text = shopConfig.CostRockets.ToString();
+        _costUnlockBooster.text = shopConfig.CostUnlockRockets.ToString();
+        _unlockLevel.text = shopConfig.UnlockLevelForRocketBooster.ToString();
+    }
+
+    public override void CanUnlockBooster(int currentLevel)
+    {
+        
+        if (currentLevel==_shopConfig.UnlockLevelForRocketBooster)
+        {
+            MakeAvailable();
+            base.CanUnlockBooster(currentLevel);
+        }
     }
 }

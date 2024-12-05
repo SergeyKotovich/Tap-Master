@@ -1,13 +1,11 @@
-using System;
 using JetBrains.Annotations;
-using UniTaskPubSub;
 using UnityEngine;
-using VContainer;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private LevelsLoader _levelsLoader;
     [SerializeField] private UIController _uiController;
+    
     private int _indexCurrentLevel;
     private Level _currentLevel;
 

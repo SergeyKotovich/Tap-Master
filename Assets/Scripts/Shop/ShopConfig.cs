@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Create ShopPricesConfig", fileName = "ShopPricesConfig", order = 0)]
-public class ShopPricesConfig : ScriptableObject
+[CreateAssetMenu(menuName = "Create ShopConfig", fileName = "ShopConfig", order = 0)]
+public class ShopConfig : ScriptableObject
 {
     [field: SerializeField] public int CostRockets { get; private set; }
     [field: SerializeField] public int CostLaser { get; private set; }
@@ -11,4 +11,7 @@ public class ShopPricesConfig : ScriptableObject
     [field: SerializeField] public int CostUnlockBlackHole { get; private set; }
     [field: SerializeField] public int CostStandardSkin { get; private set; }
     
+    [field: SerializeField] public int UnlockLevelForRocketBooster { get; private set; }
+    [field: SerializeField] public int UnlockLevelForLaserBooster { get; private set; }
+    [field: SerializeField] public int UnlockLevelForBlackHoleBooster { get; private set; }
 }

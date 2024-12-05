@@ -10,9 +10,9 @@ public class Skin : MonoBehaviour
     [field: SerializeField] public bool WasBought { get; private set; }
     public int Cost { get; private set; }
 
-    public void Initialize(ShopPricesConfig shopPricesConfig)
+    public void Initialize(ShopConfig shopConfig)
     {
-        Cost = shopPricesConfig.CostStandardSkin;
+        Cost = shopConfig.CostStandardSkin;
     }
 
     public void MarkAsBought()

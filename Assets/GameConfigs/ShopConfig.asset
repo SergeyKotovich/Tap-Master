@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9f2ebfab5384d43a2fb54d7b4790c5b, type: 3}
-  m_Name: ShopPricesConfig
+  m_Name: ShopConfig
   m_EditorClassIdentifier: 
   <CostRockets>k__BackingField: 10
   <CostLaser>k__BackingField: 10
@@ -19,3 +19,6 @@ MonoBehaviour:
   <CostUnlockLaser>k__BackingField: 20
   <CostUnlockBlackHole>k__BackingField: 20
   <CostStandardSkin>k__BackingField: 30
+  <UnlockLevelForRocketBooster>k__BackingField: 2
+  <UnlockLevelForLaserBooster>k__BackingField: 3
+  <UnlockLevelForBlackHoleBooster>k__BackingField: 4
