@@ -15,7 +15,6 @@ public class BlackHoleShopView : BoosterShopView
         if (currentLevel==_shopConfig.UnlockLevelForBlackHoleBooster)
         {
             MakeAvailable();
-            base.CanUnlockBooster(currentLevel);
         }
     }
 }

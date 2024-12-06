@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class BoostersShopController : MonoBehaviour
 {
-    [SerializeField] private List<Booster> _boosters;
-
     private IMoneyHandler _moneyHandler;
+    private List<Booster> _boosters;
 
-    public void Initialize(ShopConfig shopConfig, IMoneyHandler moneyHandler, IInventoryHandler inventory)
+    public void Initialize(ShopConfig shopConfig, IMoneyHandler moneyHandler, List<Booster> boosters)
     {
+        _boosters = boosters;
         _moneyHandler = moneyHandler;
         
-        inventory.Initialize(_boosters);
-
         foreach (var booster in _boosters)
         {
             booster.Initialize(shopConfig);

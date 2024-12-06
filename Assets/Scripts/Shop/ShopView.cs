@@ -5,16 +5,15 @@ public class ShopView : MonoBehaviour
 {
     [SerializeField] private List<BoosterShopView> _boostersShopView;
     [SerializeField] private SkinsShopView _skinsShopView;
-    [SerializeField] private ShopConfig _shopConfig;
 
-    public void Initialize()
+    public void Initialize(ShopConfig shopConfig)
     {
         foreach (var boosterShopView in _boostersShopView)
         {
-            boosterShopView.Initialize(_shopConfig);
+            boosterShopView.Initialize(shopConfig);
         }
 
-        _skinsShopView.Initialize(_shopConfig);
+        _skinsShopView.Initialize(shopConfig);
     }
     public void UpdateCurrentLevel(int currentLevel)
     {

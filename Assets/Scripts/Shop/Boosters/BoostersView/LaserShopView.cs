@@ -14,7 +14,6 @@ public class LaserShopView : BoosterShopView
         if (currentLevel==_shopConfig.UnlockLevelForLaserBooster)
         {
             MakeAvailable();
-            base.CanUnlockBooster(currentLevel);
         }
     }
 }

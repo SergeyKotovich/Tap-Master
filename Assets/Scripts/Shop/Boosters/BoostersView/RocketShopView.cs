@@ -16,7 +16,6 @@ public class RocketShopView : BoosterShopView
         if (currentLevel==_shopConfig.UnlockLevelForRocketBooster)
         {
             MakeAvailable();
-            base.CanUnlockBooster(currentLevel);
         }
     }
 }

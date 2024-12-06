@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cube;
 using UniTaskPubSub;
 using UnityEngine;
@@ -9,12 +10,14 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private ShakeAnimationController _shakeAnimationController;
     [SerializeField] private GameObject _flyEffectPrefab;
     [SerializeField] private LevelConfig _levelConfig;
+    [SerializeField] private List<Booster> _boosters;
 
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(_shakeAnimationController);
         builder.RegisterInstance(_flyEffectPrefab);
         builder.RegisterInstance(_levelConfig);
+        builder.RegisterInstance(_boosters);
         
         
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

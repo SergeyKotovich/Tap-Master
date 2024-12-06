@@ -1,26 +1,22 @@
+using JetBrains.Annotations;
 using UnityEngine;
+using VContainer;
 
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private DefaultData _defaultData;
+    private IInventoryHandler _inventory;
 
-    [SerializeField] private Wallet _wallet;
-    [SerializeField] private Inventory _inventory;
-
-
-    private void Awake()
+    [Inject]
+    public void Construct(IInventoryHandler inventory)
     {
-        _defaultData = new DefaultData();
+        _inventory = inventory;
     }
 
-  //  public void TryBuy(BoostersType boostersType)
-  //  {
-  //      var item = _inventory.GetItemByType(boostersType);
-//
-  //      if (!_wallet.HasEnoughMoney(item.Price)) return;
-//
-  //      _wallet.SpendMoney(item.Price);
-  //      _inventory.AddNewItem(item);
-  //  }
+    [UsedImplicitly]
+    public void SpendBooster(Booster booster)
+    {
+        _inventory.UseBooster(booster);
+    }
+    
 }

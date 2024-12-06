@@ -962,7 +962,6 @@ MonoBehaviour:
   - {fileID: 756034915}
   - {fileID: 830243161}
   _skinsShopView: {fileID: 356361409}
-  _shopConfig: {fileID: 11400000, guid: 4ec2b3a87c00033429607e9b3464ff0b, type: 2}
 --- !u!114 &50865577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2458,15 +2457,19 @@ MonoBehaviour:
   - {fileID: 398286693}
   - {fileID: 456251203}
   - {fileID: 1070064649}
-  - {fileID: 1501376731}
   - {fileID: 1149992400}
   - {fileID: 1693206547}
   - {fileID: 977095225}
   - {fileID: 50865572}
   - {fileID: 1899106620}
+  - {fileID: 1209295128}
   _shakeAnimationController: {fileID: 487649664}
   _flyEffectPrefab: {fileID: 5737998239862026281, guid: 42665d8273ec7e64c982ceb4df495854, type: 3}
   _levelConfig: {fileID: 11400000, guid: dfdc04df2c5008e498dae76f4616de81, type: 2}
+  _boosters:
+  - {fileID: 760225339}
+  - {fileID: 756034916}
+  - {fileID: 830243162}
 --- !u!1 &201777874
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,50 +3205,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257629992}
   m_CullTransparentMesh: 1
---- !u!1 &259329442
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 259329443}
-  - component: {fileID: 259329444}
-  m_Layer: 0
-  m_Name: InventoryController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &259329443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259329442}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 958271115}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &259329444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259329442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 867798ce17a64b87bb3fe937c64e2293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &275693254
 GameObject:
   m_ObjectHideFlags: 0
@@ -6738,7 +6697,6 @@ MonoBehaviour:
   _costBuyingBooster: {fileID: 1608751316}
   _costUnlockBooster: {fileID: 1823459309}
   _unlockLevel: {fileID: 1182191748}
-  _boosterButton: {fileID: 32867005}
   _activeBoosterPlate: {fileID: 920803924}
   _inactiveBoosterPlate: {fileID: 1685341959}
 --- !u!114 &756034916
@@ -6847,7 +6805,6 @@ MonoBehaviour:
   _costBuyingBooster: {fileID: 2075153395}
   _costUnlockBooster: {fileID: 13859325}
   _unlockLevel: {fileID: 103741045}
-  _boosterButton: {fileID: 1723634209}
   _activeBoosterPlate: {fileID: 1233611215}
   _inactiveBoosterPlate: {fileID: 561890763}
 --- !u!114 &760225339
@@ -7587,7 +7544,6 @@ MonoBehaviour:
   _costBuyingBooster: {fileID: 2010887582}
   _costUnlockBooster: {fileID: 767731592}
   _unlockLevel: {fileID: 1317441996}
-  _boosterButton: {fileID: 1786827182}
   _activeBoosterPlate: {fileID: 716563537}
   _inactiveBoosterPlate: {fileID: 981149502}
 --- !u!114 &830243162
@@ -8329,6 +8285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 958271115}
+  - component: {fileID: 958271116}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -8348,11 +8305,27 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1524939197}
-  - {fileID: 259329443}
+  m_Children: []
   m_Father: {fileID: 1209295130}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &958271116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958271113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683d3d91c695407a91a6eee6ba22459a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blackHoleCount: {fileID: 112531788}
+  _laserCount: {fileID: 226373070}
+  _rocketCount: {fileID: 402816319}
+  _rocketButton: {fileID: 1723634209}
+  _laserButton: {fileID: 32867005}
+  _blackHoleButton: {fileID: 1786827182}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -9760,7 +9733,8 @@ MonoBehaviour:
   _walletView: {fileID: 1183443276}
   _levelView: {fileID: 1383421145}
   _shopView: {fileID: 50865576}
-  _inventoryView: {fileID: 0}
+  _inventoryView: {fileID: 958271116}
+  _shopConfig: {fileID: 11400000, guid: 4ec2b3a87c00033429607e9b3464ff0b, type: 2}
 --- !u!1 &1150058867
 GameObject:
   m_ObjectHideFlags: 0
@@ -10360,9 +10334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3c3243ef7d45fd96405e2b012f8978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultData:
-    <Money>k__BackingField: 0
-    <BoostersCount>k__BackingField: 0
 --- !u!4 &1209295130
 Transform:
   m_ObjectHideFlags: 0
@@ -12979,53 +12950,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501376731}
   m_CullTransparentMesh: 1
---- !u!1 &1524939196
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1524939197}
-  - component: {fileID: 1524939198}
-  m_Layer: 0
-  m_Name: InventoryView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1524939197
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524939196}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 958271115}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1524939198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524939196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 683d3d91c695407a91a6eee6ba22459a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _blackHoleCount: {fileID: 112531788}
-  _laserCount: {fileID: 226373070}
-  _rocketCount: {fileID: 0}
 --- !u!1 &1531001625
 GameObject:
   m_ObjectHideFlags: 0
@@ -14232,7 +14156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91003c500edc4579b206bac137cdf1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boosters: []
 --- !u!1 &1665391032
 GameObject:
   m_ObjectHideFlags: 0
@@ -14840,7 +14763,6 @@ GameObject:
   - component: {fileID: 1723634211}
   - component: {fileID: 1723634210}
   - component: {fileID: 1723634209}
-  - component: {fileID: 1723634212}
   m_Layer: 5
   m_Name: RocketButton
   m_TagString: Untagged
@@ -14925,13 +14847,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1723634212}
-        m_TargetAssemblyTypeName: ButtonInteractable, Assembly-CSharp
-        m_MethodName: DisableInteractable
-        m_Mode: 1
+      - m_Target: {fileID: 1209295129}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SpendBooster
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 760225339}
+          m_ObjectArgumentAssemblyTypeName: Booster, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14975,20 +14897,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723634207}
   m_CullTransparentMesh: 1
---- !u!114 &1723634212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723634207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7600cd899ed743a889112177d9d14ac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _delay: 7000
-  _button: {fileID: 1723634209}
 --- !u!1 &1755891692
 GameObject:
   m_ObjectHideFlags: 0
