@@ -34,7 +34,7 @@ public class InventoryView : MonoBehaviour
                 _rocketButton.interactable = false;
                 break;
             case BoostersType.BlackHole:
-                _rocketButton.interactable = false;
+                _blackHoleButton.interactable = false;
                 break;
         }
     }
