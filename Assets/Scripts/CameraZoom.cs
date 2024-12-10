@@ -2,46 +2,55 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
 {
-    [SerializeField] private float zoomSpeed; 
-    [SerializeField] private float swipePanSpeed; 
+    [SerializeField] private float _zoomSpeed;
+    [SerializeField] private float _swipePanSpeed;
 
-    public float minFOV; 
-    public float maxFOV; 
+    [SerializeField] private float _minFOV;
+    [SerializeField] private float _maxFOV;
 
-    private Camera cam;
-    private float initialPinchDistance; 
+    private Camera _camera;
+    private float _initialPinchDistance;
+    private bool _isActive = true;
 
     private void Start()
     {
-        cam = Camera.main;
+        _camera = Camera.main;
     }
 
     private void Update()
     {
-       
-        var scroll = Input.GetAxis("Mouse ScrollWheel");
-        cam.fieldOfView += -scroll * zoomSpeed;
-        
-        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minFOV, maxFOV);
-        
-        if (Input.touchCount == 2)
+        if (_isActive)
         {
-            Touch touchZero = Input.GetTouch(0);
-            Touch touchOne = Input.GetTouch(1);
+            var scroll = Input.GetAxis("Mouse ScrollWheel");
+            _camera.fieldOfView += -scroll * _zoomSpeed;
 
-            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
-            {
-                initialPinchDistance = Vector2.Distance(touchZero.position, touchOne.position);
-            }
-            else if (touchZero.phase == TouchPhase.Moved || touchOne.phase == TouchPhase.Moved)
-            {
-                float currentPinchDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                float deltaDistance = currentPinchDistance - initialPinchDistance;
-                
-                cam.transform.Translate(cam.transform.forward * deltaDistance * swipePanSpeed * Time.deltaTime, Space.World);
+            _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, _minFOV, _maxFOV);
 
-                initialPinchDistance = currentPinchDistance;
+            if (Input.touchCount == 2)
+            {
+                var touchZero = Input.GetTouch(0);
+                var touchOne = Input.GetTouch(1);
+
+                if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+                {
+                    _initialPinchDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                }
+                else if (touchZero.phase == TouchPhase.Moved || touchOne.phase == TouchPhase.Moved)
+                {
+                    var currentPinchDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                    var deltaDistance = currentPinchDistance - _initialPinchDistance;
+
+                    _camera.transform.Translate(_camera.transform.forward * deltaDistance * _swipePanSpeed * Time.deltaTime,
+                        Space.World);
+
+                    _initialPinchDistance = currentPinchDistance;
+                }
             }
         }
+    }
+
+    public void SwitchFlag()
+    {
+        _isActive = !_isActive;
     }
 }
