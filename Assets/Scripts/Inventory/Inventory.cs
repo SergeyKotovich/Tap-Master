@@ -6,15 +6,19 @@ public class Inventory : IInventoryHandler
 {
     public event Action <Booster> CountBoostersChanged;
     public event Action<Booster> BoostersDepleted;
-    private List<Booster> Boosters { get; }
+    
+    private readonly List<Booster> _boosters;
+    
+    private readonly BackgroundsLoader _backgroundsLoader;
 
-    public Inventory(List<Booster> boosters)
+    public Inventory(List<Booster> boosters, BackgroundsLoader backgroundsLoader)
     {
-        Boosters = boosters;
+        _backgroundsLoader = backgroundsLoader;
+        _boosters = boosters;
     }
     public void AddBooster(Booster booster)
     {
-        if (Boosters.Any(item => booster.Type == item.Type))
+        if (_boosters.Any(item => booster.Type == item.Type))
         {
             booster.AddBooster();
             CountBoostersChanged?.Invoke(booster);
@@ -23,7 +27,7 @@ public class Inventory : IInventoryHandler
 
     public void UseBooster(Booster booster)
     {
-        if (Boosters.Any(item =>booster.Type == item.Type))
+        if (_boosters.Any(item =>booster.Type == item.Type))
         {
             if (!booster.HasBooster())
             {
@@ -36,5 +40,10 @@ public class Inventory : IInventoryHandler
                 BoostersDepleted?.Invoke(booster);
             }
         }
+    }
+
+    public void UseBackground(Background background)
+    {
+        _backgroundsLoader.SetBackground(background.Type);
     }
 }

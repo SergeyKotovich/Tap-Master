@@ -998,6 +998,12 @@ MonoBehaviour:
   - {fileID: 756034915}
   - {fileID: 830243161}
   _skinsShopView: {fileID: 356361409}
+  _backgroundsShopView:
+  - {fileID: 1579658655}
+  - {fileID: 823842063}
+  - {fileID: 1580305784}
+  - {fileID: 1168680683}
+  - {fileID: 307540592}
 --- !u!114 &50865577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,6 +1019,7 @@ MonoBehaviour:
   _shopConfig: {fileID: 11400000, guid: 4ec2b3a87c00033429607e9b3464ff0b, type: 2}
   _skinsShopController: {fileID: 356361410}
   _boostersShopController: {fileID: 1663757467}
+  _backgroundsShopController: {fileID: 622757757}
 --- !u!1 &68365785
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,6 +2588,13 @@ MonoBehaviour:
   - {fileID: 760225339}
   - {fileID: 756034916}
   - {fileID: 830243162}
+  _backgrounds:
+  - {fileID: 1579658654}
+  - {fileID: 823842062}
+  - {fileID: 1580305783}
+  - {fileID: 1168680682}
+  - {fileID: 307540591}
+  _backgroundsLoader: {fileID: 1303209380}
 --- !u!1 &201477219
 GameObject:
   m_ObjectHideFlags: 0
@@ -4122,6 +4136,8 @@ GameObject:
   - component: {fileID: 307540590}
   - component: {fileID: 307540589}
   - component: {fileID: 307540588}
+  - component: {fileID: 307540591}
+  - component: {fileID: 307540592}
   m_Layer: 5
   m_Name: Saturn
   m_TagString: Untagged
@@ -4193,7 +4209,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 307540589}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50865577}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: UseBackground
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 307540591}
+          m_ObjectArgumentAssemblyTypeName: Background, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &307540589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4232,6 +4260,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307540586}
   m_CullTransparentMesh: 1
+--- !u!114 &307540591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307540586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665832727bfa4448b024c874ad444922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 4
+--- !u!114 &307540592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307540586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ba975881784195af0f63de12618989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: {fileID: 1612703302}
+  _background: {fileID: 307540591}
+  _price: {fileID: 2016559558}
 --- !u!1 &313250696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6633,6 +6689,7 @@ GameObject:
   - component: {fileID: 622757756}
   - component: {fileID: 622757755}
   - component: {fileID: 622757754}
+  - component: {fileID: 622757757}
   m_Layer: 5
   m_Name: BackgroundVideo
   m_TagString: Untagged
@@ -6814,6 +6871,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622757752}
   m_CullTransparentMesh: 1
+--- !u!114 &622757757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622757752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6f9d7c11f2496591631342d5716c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &646817433
 GameObject:
   m_ObjectHideFlags: 0
@@ -8669,6 +8738,8 @@ GameObject:
   - component: {fileID: 823842061}
   - component: {fileID: 823842060}
   - component: {fileID: 823842059}
+  - component: {fileID: 823842062}
+  - component: {fileID: 823842063}
   m_Layer: 5
   m_Name: Earth
   m_TagString: Untagged
@@ -8740,7 +8811,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823842060}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50865577}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: UseBackground
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 823842062}
+          m_ObjectArgumentAssemblyTypeName: Background, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &823842060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8779,6 +8862,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823842057}
   m_CullTransparentMesh: 1
+--- !u!114 &823842062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823842057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665832727bfa4448b024c874ad444922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 1
+--- !u!114 &823842063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823842057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ba975881784195af0f63de12618989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: {fileID: 201477221}
+  _background: {fileID: 823842062}
+  _price: {fileID: 1954938726}
 --- !u!1 &830243157
 GameObject:
   m_ObjectHideFlags: 0
@@ -11597,6 +11708,8 @@ GameObject:
   - component: {fileID: 1168680681}
   - component: {fileID: 1168680680}
   - component: {fileID: 1168680679}
+  - component: {fileID: 1168680682}
+  - component: {fileID: 1168680683}
   m_Layer: 5
   m_Name: Moon
   m_TagString: Untagged
@@ -11668,7 +11781,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1168680680}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50865577}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: UseBackground
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1168680682}
+          m_ObjectArgumentAssemblyTypeName: Background, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1168680680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11707,6 +11832,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168680677}
   m_CullTransparentMesh: 1
+--- !u!114 &1168680682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168680677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665832727bfa4448b024c874ad444922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 3
+--- !u!114 &1168680683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168680677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ba975881784195af0f63de12618989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: {fileID: 1743055527}
+  _background: {fileID: 1168680682}
+  _price: {fileID: 849995492}
 --- !u!1 &1182191746
 GameObject:
   m_ObjectHideFlags: 0
@@ -15616,6 +15769,8 @@ GameObject:
   - component: {fileID: 1579658653}
   - component: {fileID: 1579658652}
   - component: {fileID: 1579658651}
+  - component: {fileID: 1579658654}
+  - component: {fileID: 1579658655}
   m_Layer: 5
   m_Name: Stars
   m_TagString: Untagged
@@ -15687,7 +15842,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1579658652}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50865577}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: UseBackground
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1579658654}
+          m_ObjectArgumentAssemblyTypeName: Background, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1579658652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15726,6 +15893,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579658649}
   m_CullTransparentMesh: 1
+--- !u!114 &1579658654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579658649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665832727bfa4448b024c874ad444922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 0
+--- !u!114 &1579658655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579658649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ba975881784195af0f63de12618989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: {fileID: 646817435}
+  _background: {fileID: 1579658654}
+  _price: {fileID: 1324404915}
 --- !u!1 &1580305778
 GameObject:
   m_ObjectHideFlags: 0
@@ -15738,6 +15933,8 @@ GameObject:
   - component: {fileID: 1580305782}
   - component: {fileID: 1580305781}
   - component: {fileID: 1580305780}
+  - component: {fileID: 1580305783}
+  - component: {fileID: 1580305784}
   m_Layer: 5
   m_Name: Mars
   m_TagString: Untagged
@@ -15809,7 +16006,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1580305781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 50865577}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: UseBackground
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1580305783}
+          m_ObjectArgumentAssemblyTypeName: Background, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1580305781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15848,6 +16057,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580305778}
   m_CullTransparentMesh: 1
+--- !u!114 &1580305783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580305778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665832727bfa4448b024c874ad444922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Type>k__BackingField: 2
+--- !u!114 &1580305784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580305778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ba975881784195af0f63de12618989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cost: {fileID: 1574766711}
+  _background: {fileID: 1580305783}
+  _price: {fileID: 1803920095}
 --- !u!1 &1580996637
 GameObject:
   m_ObjectHideFlags: 0

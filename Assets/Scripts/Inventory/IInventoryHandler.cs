@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 public interface IInventoryHandler
 {
@@ -7,5 +6,6 @@ public interface IInventoryHandler
     public event Action <Booster> CountBoostersChanged;
     void AddBooster(Booster booster);
     void UseBooster(Booster booster);
+    void UseBackground(Background background);
 
 }

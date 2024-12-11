@@ -11,6 +11,8 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private GameObject _flyEffectPrefab;
     [SerializeField] private LevelConfig _levelConfig;
     [SerializeField] private List<Booster> _boosters;
+    [SerializeField] private List<Background> _backgrounds;
+    [SerializeField] private BackgroundsLoader _backgroundsLoader;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -18,7 +20,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_flyEffectPrefab);
         builder.RegisterInstance(_levelConfig);
         builder.RegisterInstance(_boosters);
-        
+        builder.RegisterInstance(_backgrounds);
+        builder.RegisterInstance(_backgroundsLoader);
         
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);

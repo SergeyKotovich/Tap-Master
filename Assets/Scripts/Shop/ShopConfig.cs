@@ -14,4 +14,5 @@ public class ShopConfig : ScriptableObject
     [field: SerializeField] public int UnlockLevelForRocketBooster { get; private set; }
     [field: SerializeField] public int UnlockLevelForLaserBooster { get; private set; }
     [field: SerializeField] public int UnlockLevelForBlackHoleBooster { get; private set; }
+    [field: SerializeField] public int CostStandardBackground { get; private set; }
 }

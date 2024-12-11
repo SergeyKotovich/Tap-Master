@@ -11,7 +11,5 @@ public class SkinsShopView : MonoBehaviour
         {
             cost.text = shopConfig.CostStandardSkin.ToString();
         }
-
-        
     }
 }
