@@ -16,13 +16,15 @@ public class ShakeAnimationController : MonoBehaviour
     }
     public async UniTask ShakeAnimation()
     {
-        foreach (var hit in _hitsShakeAnimation)
+        for (var i = 0; i < _hitsShakeAnimation.Count; i++)
         {
+            var hit = _hitsShakeAnimation[i];
             hit.transform.DOPunchScale(Vector3.one * 0.5f, _obstacleShakeDuration);
             hit.transform.DOScale(Vector3.one, _obstacleShakeDuration);
             await UniTask.Delay(40);
         }
     }
+
 
     public void ResetHits()
     {
