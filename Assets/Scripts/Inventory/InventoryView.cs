@@ -78,7 +78,13 @@ public class InventoryView : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_inventory == null)
+        {
+            return;
+        }
+        
         _inventory.CountBoostersChanged -= UpdateCountBoosters;
         _inventory.BoostersDepleted -= DisableInteractableButton;
+
     }
 }

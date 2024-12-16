@@ -1,5 +1,6 @@
 using System;
-using DG.Tweening;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UniTaskPubSub;
 using UnityEngine;
 using VContainer;
@@ -8,103 +9,47 @@ namespace ScreensController
 {
     public class ScreensController : MonoBehaviour
     {
-        public event Action VictoryScreenLoaded;
-        public event Action LevelsScreenOpened;
-        
         [SerializeField] private GameObject _victoryScreen;
         [SerializeField] private GameObject _defeatScreen;
-        [SerializeField] private GameObject _shopScreen;
-        [SerializeField] private GameObject _settingsScreen;
-        [SerializeField] private GameObject _levelsScreen;
-        [SerializeField] private GameObject _gameCompletedScreen;
 
-        public bool IsAnyWindowOpened;
-        private IDisposable _subscriptions;
+        private readonly List<IDisposable> _subscriptions = new();
+        private bool _levelCompleted;
 
         [Inject]
         public void Construct(AsyncMessageBus messageBus)
         {
-            _subscriptions = messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen());
+            _subscriptions.Add(messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen()));
+            _subscriptions.Add(messageBus.Subscribe<AllMovesWasSpentEvent>(_ => ShowDefeatScreen()));
         }
 
-        private void ShowVictoryScreen()
+        private async UniTask ShowDefeatScreen()
         {
- //           HideAllScreens();
- 
+            await UniTask.Delay(600);
+            if (_levelCompleted)
+            {
+                return;
+            }
+            _defeatScreen.SetActive(true);
+        }
+
+        private async UniTask ShowVictoryScreen()
+        {
+            _levelCompleted = true;
             _victoryScreen.SetActive(true);
-            VictoryScreenLoaded?.Invoke();
-            IsAnyWindowOpened = true;
-        }
-        public void HideVictoryScreen()
-        {
-            _victoryScreen.gameObject.SetActive(false);
-            IsAnyWindowOpened = false;
-
-        }
-
-        public void ShowShopScreen()
-        {
-            //HideAllScreens();
-            
-            _shopScreen.gameObject.SetActive(true);
-            IsAnyWindowOpened = true;
-
-        }
-        
-        public void ShowLevelsScreen()
-        {
-            _levelsScreen.gameObject.SetActive(true);
-            LevelsScreenOpened?.Invoke();
-            IsAnyWindowOpened = true;
-        }
-        
-        
-        public void ShowSettingsScreen()
-        {
-            HideAllScreens();
-            
-            _settingsScreen.gameObject.SetActive(true);
-            IsAnyWindowOpened = true;
-        }
- 
-        public void ShowGameCompletedScreen()
-        {
-            HideAllScreens();
-            _gameCompletedScreen.gameObject.SetActive(true);
-            IsAnyWindowOpened = true;
-
-        }
-        
-        public void HideGameCompletedScreen()
-        {
-            HideAllScreens();
-            _gameCompletedScreen.gameObject.SetActive(false);
-            IsAnyWindowOpened = false;
-
-        }
-
-        public void HideAllScreens()
-        {
-            
-            _victoryScreen.gameObject.SetActive(false);
-            _settingsScreen.gameObject.SetActive(false);
-            _shopScreen.gameObject.SetActive(false);
-            _levelsScreen.gameObject.SetActive(false);
-            _defeatScreen.gameObject.SetActive(false);
-            IsAnyWindowOpened = false;
-
-        }
-        
-        public void ShowDefeatScreen()
-        {
-            _defeatScreen.gameObject.SetActive(true);
-            IsAnyWindowOpened = true;
-
+            await UniTask.Delay(1000);
+            _levelCompleted = false;
         }
 
         private void OnDestroy()
         {
-            _subscriptions?.Dispose();
+            if (_subscriptions == null)
+            {
+                return;
+            }
+            foreach (var subscription in _subscriptions)
+            {
+                subscription.Dispose();
+            }
         }
     }
 }

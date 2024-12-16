@@ -55,6 +55,6 @@ public class LaserShot : MonoBehaviour
 
     private void OnDestroy()
     {
-        _subscriptions.Dispose();
+        _subscriptions?.Dispose();
     }
 }

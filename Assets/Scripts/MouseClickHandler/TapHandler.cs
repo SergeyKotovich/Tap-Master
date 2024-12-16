@@ -4,17 +4,20 @@ using UniTaskPubSub;
 using UnityEngine;
 using VContainer;
 
-public class MouseClickHandler : MonoBehaviour
+public class TapHandler : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
 
     private bool _canClick = true;
     private bool _isLaserActive;
+
     private AsyncMessageBus _messageBus;
+    private ITurnHandler _movesCounter;
 
     [Inject]
-    public void Construct(AsyncMessageBus messageBus)
+    public void Construct(AsyncMessageBus messageBus, ITurnHandler movesCounter)
     {
+        _movesCounter = movesCounter;
         _messageBus = messageBus;
     }
 
@@ -39,6 +42,16 @@ public class MouseClickHandler : MonoBehaviour
                     return;
                 }
 
+                if (_movesCounter.HasMoves())
+                {
+                    _movesCounter.SpendOneMove();
+                }
+                else
+                {
+                    ClickEnabled(false);
+                }
+               
+                
                 var cube = hit.transform.GetComponent<IMover>();
                 if (cube.IsMoving)
                 {

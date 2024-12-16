@@ -22,6 +22,9 @@ public class WalletView : MonoBehaviour
 
     private void OnDestroy()
     {
-        _wallet.AmountMoneyUpdated -= CalculateMoney;
+        if (_wallet != null)
+        {
+            _wallet.AmountMoneyUpdated -= CalculateMoney;
+        }
     }
 }

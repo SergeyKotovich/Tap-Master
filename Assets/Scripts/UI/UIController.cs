@@ -9,14 +9,17 @@ public class UIController : MonoBehaviour
     [SerializeField] private ShopView _shopView;
     [SerializeField] private InventoryView _inventoryView;
     [SerializeField] private ShopConfig _shopConfig;
-    
+    [SerializeField] private MovesCounterView _movesCounterView;
+
     [Inject]
-    public void Construct(WonMoneyController wonMoneyController, Wallet wallet , IInventoryHandler inventory)
+    public void Construct(WonMoneyController wonMoneyController, Wallet wallet, IInventoryHandler inventory,
+        MovesCounter movesCounter)
     {
         _resourceCounterView.Initialize(wonMoneyController);
         _walletView.Initialize(wallet);
         _shopView.Initialize(_shopConfig);
         _inventoryView.Initialize(inventory, _shopConfig);
+        _movesCounterView.Initialize(movesCounter);
     }
 
     public void UpdateLevelInfo(int levelNumber)

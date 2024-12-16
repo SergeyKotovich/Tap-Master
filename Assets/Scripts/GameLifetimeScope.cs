@@ -10,10 +10,10 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private ShakeAnimationController _shakeAnimationController;
     [SerializeField] private GameObject _flyEffectPrefab;
     [SerializeField] private LevelConfig _levelConfig;
+    [SerializeField] private BackgroundsLoader _backgroundsLoader;
     [SerializeField] private List<Booster> _boosters;
     [SerializeField] private List<Background> _backgrounds;
-    [SerializeField] private BackgroundsLoader _backgroundsLoader;
-
+    
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(_shakeAnimationController);
@@ -29,5 +29,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<WonMoneyController>(Lifetime.Singleton);
         builder.Register<Inventory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Wallet>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+        builder.Register<MovesCounter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
     }
 }

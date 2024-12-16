@@ -6,7 +6,7 @@ using DG.Tweening;
 using UniTaskPubSub;
 using UnityEngine;
 
-public class Level : MonoBehaviour, ILevelProvider
+public class Level : MonoBehaviour, ILevelProvider, ICountCubesProvider
 {
     [field: SerializeField] public int LevelNumber { get; private set; }
     [SerializeField] private List<Cube.Cube> _level;
@@ -15,10 +15,10 @@ public class Level : MonoBehaviour, ILevelProvider
     private readonly List<Vector3> _cubesTargetPositions = new();
     private readonly float _duration = 0.3f;
 
-    private int _countCubes;
+    public int CountCubes { get; private set; }
     private IDisposable _subscriptions;
     private AsyncMessageBus _messageBus;
-    private readonly int _millisecondsDelay = 1000;
+    private readonly int _millisecondsDelay = 500;
 
     public void Initialize(ObstacleDetector obstacleDetector, ShakeAnimationController shakeAnimationController,
         EffectFactory effectFactory, AsyncMessageBus messageBus)
@@ -30,8 +30,8 @@ public class Level : MonoBehaviour, ILevelProvider
 
         _messageBus = messageBus;
         _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
-        _countCubes = _level.Count;
-        
+        CountCubes = _level.Count;
+
         if (LevelNumber > 6)
         {
             return;
@@ -42,12 +42,12 @@ public class Level : MonoBehaviour, ILevelProvider
 
     private async UniTask UpdateCountCubes()
     {
-        if (_countCubes > 0)
+        if (CountCubes > 0)
         {
-            _countCubes--;
+            CountCubes--;
         }
 
-        if (_countCubes <= 0)
+        if (CountCubes <= 0)
         {
             await UniTask.Delay(_millisecondsDelay);
             var countCubesInLevel = _level.Count;

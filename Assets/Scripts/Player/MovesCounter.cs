@@ -1,35 +1,40 @@
 using System;
-using TMPro;
+using UniTaskPubSub;
 using UnityEngine;
 
-
-public class MovesCounter : MonoBehaviour
+public class MovesCounter : ITurnHandler
 {
-    public event Action AllMovesWasSpent;
-    public int AvailableMoves { get; private set; }
+    public event Action<int> CountMovesChanged;
 
-    [SerializeField] private TextMeshProUGUI _movesCountLabel;
+    private int _availableMoves;
 
-    public void InitializeMovesCount(int moves)
+    private readonly AsyncMessageBus _messageBus;
+
+    public MovesCounter(AsyncMessageBus messageBus)
     {
-        AvailableMoves = moves + 15;
-        UpdateMoves();
+        _messageBus = messageBus;
     }
 
-    private void UpdateMoves()
+    public void SetCountMoves(ICountCubesProvider level)
     {
-        _movesCountLabel.text = AvailableMoves.ToString();
+        var countCubes = level.CountCubes;
+        var countMoves = Mathf.CeilToInt(countCubes * 1.1f);
+        _availableMoves = countMoves;
+        CountMovesChanged?.Invoke(_availableMoves);
     }
 
     public void SpendOneMove()
     {
-        AvailableMoves--;
-        if (AvailableMoves < 0) return;
-        UpdateMoves();
-
-        if (AvailableMoves == 0)
+        _availableMoves--;
+        CountMovesChanged?.Invoke(_availableMoves);
+        if (_availableMoves == 0)
         {
-            AllMovesWasSpent?.Invoke();
+            _messageBus.Publish(new AllMovesWasSpentEvent());
         }
+    }
+
+    public bool HasMoves()
+    {
+        return _availableMoves > 0;
     }
 }
