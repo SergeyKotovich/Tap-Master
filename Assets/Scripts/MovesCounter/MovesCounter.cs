@@ -29,7 +29,7 @@ public class MovesCounter : ITurnHandler
         CountMovesChanged?.Invoke(_availableMoves);
         if (_availableMoves == 0)
         {
-            _messageBus.Publish(new AllMovesWasSpentEvent());
+            _messageBus.Publish(new LevelFailed());
         }
     }
 

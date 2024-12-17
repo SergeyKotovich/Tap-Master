@@ -11,10 +11,12 @@ public class GameController : MonoBehaviour
 
     private int _indexCurrentLevel;
     private Level _currentLevel;
+    private LevelTimer _levelTimer;
 
     [Inject]
-    public void Construct(MovesCounter movesCounter)
+    public void Construct(MovesCounter movesCounter, LevelTimer levelTimer)
     {
+        _levelTimer = levelTimer;
         _movesCounter = movesCounter;
     }
 
@@ -50,5 +52,6 @@ public class GameController : MonoBehaviour
         _currentLevel = _levelsLoader.LoadLevel(_indexCurrentLevel);
         _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
         _movesCounter.SetCountMoves(_currentLevel);
+        _levelTimer.EnableTimer(_currentLevel.CountCubes * 2);
     }
 }

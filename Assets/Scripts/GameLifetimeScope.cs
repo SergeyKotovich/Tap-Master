@@ -30,5 +30,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<Inventory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Wallet>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<MovesCounter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+        builder.Register<LevelTimer>(Lifetime.Singleton);
     }
 }

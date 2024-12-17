@@ -19,7 +19,7 @@ namespace ScreensController
         public void Construct(AsyncMessageBus messageBus)
         {
             _subscriptions.Add(messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen()));
-            _subscriptions.Add(messageBus.Subscribe<AllMovesWasSpentEvent>(_ => ShowDefeatScreen()));
+            _subscriptions.Add(messageBus.Subscribe<LevelFailed>(_ => ShowDefeatScreen()));
         }
 
         private async UniTask ShowDefeatScreen()
