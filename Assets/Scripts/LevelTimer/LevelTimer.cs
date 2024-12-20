@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UniTaskPubSub;
 using UnityEngine;
 
-public class LevelTimer
+public class LevelTimer : IDisposable
 {
     public event Action<float> TimeChanged;
 
@@ -16,13 +16,17 @@ public class LevelTimer
     private float _currentTime;
 
     private readonly AsyncMessageBus _messageBus;
+    private readonly IDisposable _subscriptions;
+    private readonly LevelConfig _levelConfig;
 
     private CancellationTokenSource _cancellationTokenSource;
-
-    public LevelTimer(AsyncMessageBus messageBus)
+    
+    public LevelTimer(AsyncMessageBus messageBus, LevelConfig levelConfig)
     {
+        _levelConfig = levelConfig;
         _messageBus = messageBus;
         _cancellationTokenSource = new CancellationTokenSource();
+       _subscriptions = _messageBus.Subscribe<LevelCompleteEvent>(_ => ResetTimer());
     }
 
     private async UniTaskVoid StartTimer()
@@ -43,7 +47,7 @@ public class LevelTimer
                     _isRunning = false;
                     _currentTime = 0;
                     TimeChanged?.Invoke(_currentTime);
-                    _messageBus.Publish(new LevelFailed());
+                    _messageBus.Publish(new LevelFailedEvent());
                 }
             }
         }
@@ -53,24 +57,29 @@ public class LevelTimer
         }
     }
 
-    public void EnableTimer(float levelTime)
+    public void EnableTimer(int countCubes)
     {
-        if (_isRunning)
-        {
-            ResetTimer();
-        }
+        ResetTimer();
 
-        _currentTime = levelTime;
+        _currentTime = countCubes * _levelConfig.TimeMultiplier;
+
         StartTimer().Forget();
     }
 
     private void ResetTimer()
     {
-        _isRunning = false;
+        if (_isRunning)
+        {
+            _isRunning = false;
 
-        // Отменяем старый токен и создаем новый
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
-        _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource = new CancellationTokenSource();
+        }
+    }
+
+    public void Dispose()
+    {
+        _subscriptions.Dispose();
     }
 }

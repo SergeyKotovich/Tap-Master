@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
   <LevelVictoryReward>k__BackingField: 5
+  <MoveMultiplier>k__BackingField: 1.1
+  <TimeMultiplier>k__BackingField: 2

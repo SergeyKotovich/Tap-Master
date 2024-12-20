@@ -46,11 +46,6 @@ public class TapHandler : MonoBehaviour
                 {
                     _movesCounter.SpendOneMove();
                 }
-                else
-                {
-                    ClickEnabled(false);
-                }
-               
                 
                 var cube = hit.transform.GetComponent<IMover>();
                 if (cube.IsMoving)

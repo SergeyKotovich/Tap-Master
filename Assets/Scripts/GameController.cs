@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -7,11 +8,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private LevelsLoader _levelsLoader;
     [SerializeField] private UIController _uiController;
 
-    private MovesCounter _movesCounter;
-
     private int _indexCurrentLevel;
+
     private Level _currentLevel;
     private LevelTimer _levelTimer;
+    private MovesCounter _movesCounter;
+    private GameMod _gameMod;
 
     [Inject]
     public void Construct(MovesCounter movesCounter, LevelTimer levelTimer)
@@ -20,9 +22,15 @@ public class GameController : MonoBehaviour
         _movesCounter = movesCounter;
     }
 
-    public void StartGame()
+    [UsedImplicitly]
+    public void SetGameMod(int gameMod)
     {
-        LoadLevel();
+        if (Enum.IsDefined(typeof(GameMod), gameMod))
+        {
+            _gameMod = (GameMod)gameMod;
+        }
+
+        StartGame();
     }
 
     public void LoadNextLevel()
@@ -47,11 +55,26 @@ public class GameController : MonoBehaviour
         LoadLevel();
     }
 
+    private void StartGame()
+    {
+        LoadLevel();
+    }
+
     private void LoadLevel()
     {
         _currentLevel = _levelsLoader.LoadLevel(_indexCurrentLevel);
         _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
+        if (_gameMod == GameMod.Easy)
+        {
+            return;
+        }
+
         _movesCounter.SetCountMoves(_currentLevel);
-        _levelTimer.EnableTimer(_currentLevel.CountCubes * 2);
+        if (_gameMod == GameMod.Normal)
+        {
+            return;
+        }
+
+        _levelTimer.EnableTimer(_currentLevel.CountCubes);
     }
 }
