@@ -19,8 +19,9 @@ public class ShakeAnimationController : MonoBehaviour
         for (var i = 0; i < _hitsShakeAnimation.Count; i++)
         {
             var hit = _hitsShakeAnimation[i];
-            hit.transform.DOPunchScale(Vector3.one * 0.5f, _obstacleShakeDuration);
-            hit.transform.DOScale(Vector3.one, _obstacleShakeDuration);
+            var scaleTarget = hit.transform.localScale;
+            hit.transform.DOPunchScale(scaleTarget * 0.5f, _obstacleShakeDuration);
+            hit.transform.DOScale(scaleTarget, _obstacleShakeDuration);
             await UniTask.Delay(40);
         }
     }

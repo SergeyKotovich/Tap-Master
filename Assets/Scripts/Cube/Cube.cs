@@ -55,7 +55,7 @@ namespace Cube
             IsMoving = true;
             transform.SetParent(null);
             _messageBus.Publish(new CubeWasDestroyedEvent());
-            var endPosition = transform.position + transform.up * _distanceToDisable;
+            var endPosition = transform.position - transform.forward * _distanceToDisable;
             var effect = _effectFactory.ShowEffect(gameObject);
             transform.DOMove(endPosition, _moveDuration).OnComplete(() =>
             {
