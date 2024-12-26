@@ -13,28 +13,55 @@ public class CreatorLevel : MonoBehaviour
     {
         Vector3.forward, Vector3.back, Vector3.right, Vector3.left, Vector3.up, Vector3.down
     };
-    
+
+    private int gridSize = 10;
+    private float radius = 5;
+    private float thickness = 0.5f;
+    private float height = 6;
+    private float turns = 5;
+    private float pointsPerTurn = 20;
+
 
     private async void Awake()
     {
         _obstacleDetector = new ObstacleDetectorr();
 
-        for (int x = 0; x < 5; x++)
+        for (int y = 0; y < height; y++)
         {
-            for (int y = 0; y < 8; y++)
+            int layerSize = gridSize - y * 2; // Уменьшаем размеры слоя
+            if (layerSize <= 0) break;
+
+            for (int x = 0; x < layerSize; x++)
             {
-                for (int z = 0; z < 5; z++)
+                for (int z = 0; z < layerSize; z++)
                 {
-                    if (z==3%2)
-                    {
-                        continue;
-                    }
-                    Vector3Int position = new Vector3Int(x, y, z);
-                    SpawnCubeWithRandomDirection(position);
+                    SpawnCubeWithRandomDirection(new Vector3Int(x + y, y, z + y));
                     await UniTask.Delay(10);
                 }
             }
         }
+
+        // Нижняя часть пирамиды
+        for (int y = 1; y <= height; y++) // Начинаем с 1, чтобы не дублировать средний слой
+        {
+            int layerSize = gridSize - y * 2;
+            if (layerSize <= 0) break;
+
+            for (int x = 0; x < layerSize; x++)
+            {
+                for (int z = 0; z < layerSize; z++)
+                {
+                    SpawnCubeWithRandomDirection(new Vector3Int(x + y, -y, z + y));
+                    await UniTask.Delay(10);
+                }
+            }
+        }
+                
+            
+        
+               
+            
+        
     }
 
     private void SpawnCubeWithRandomDirection(Vector3Int position)

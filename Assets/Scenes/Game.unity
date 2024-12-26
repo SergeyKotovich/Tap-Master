@@ -5400,6 +5400,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levels:
+  - {fileID: 1864977695994220008, guid: b7705e611f471d44d82fc494b8c577e5, type: 3}
+  - {fileID: 2831320319640230489, guid: abc18997e16cdac4f85c4d63d194dbff, type: 3}
   - {fileID: 278191919331040169, guid: 0865bbbfad7601b4ea5c007e36d19aa1, type: 3}
   - {fileID: 8456484381346972286, guid: 6e1d613ccd8d55848b841065478ab4d4, type: 3}
   _parentLevel: {fileID: 1070064651}
@@ -12203,7 +12205,7 @@ Transform:
   m_GameObject: {fileID: 1070064649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
