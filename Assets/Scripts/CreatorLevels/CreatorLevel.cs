@@ -15,52 +15,47 @@ public class CreatorLevel : MonoBehaviour
     };
 
     private int gridSize = 10;
-    private float radius = 5;
-    private float thickness = 0.5f;
-    private float height = 6;
+    private float radius = 3;
+    private float thickness = 2f;
+    private float height = 5;
     private float turns = 5;
-    private float pointsPerTurn = 20;
+    private float pointsPerTurn = 5;
 
 
     private async void Awake()
     {
         _obstacleDetector = new ObstacleDetectorr();
 
-        for (int y = 0; y < height; y++)
+        for (int level = 0; level < 5; level++)
         {
-            int layerSize = gridSize - y * 2; // Уменьшаем размеры слоя
-            if (layerSize <= 0) break;
+            int size = 9 - level * 2; // Каждый уровень меньше предыдущего
+            if (size <= 0) break;
 
-            for (int x = 0; x < layerSize; x++)
+            for (int x = 0; x < size; x++)
             {
-                for (int z = 0; z < layerSize; z++)
+                for (int z = 0; z < size; z++)
                 {
-                    SpawnCubeWithRandomDirection(new Vector3Int(x + y, y, z + y));
+                    SpawnCubeWithRandomDirection(new Vector3Int(x + level, level, z + level));
                     await UniTask.Delay(10);
                 }
             }
         }
 
-        // Нижняя часть пирамиды
-        for (int y = 1; y <= height; y++) // Начинаем с 1, чтобы не дублировать средний слой
+        // Ствол дерева
+        int trunkX = 9 / 2 - 2 / 2;
+        int trunkZ = 9 / 2 - 2 / 2;
+        for (int y = 0; y < 3; y++)
         {
-            int layerSize = gridSize - y * 2;
-            if (layerSize <= 0) break;
-
-            for (int x = 0; x < layerSize; x++)
+            for (int x = 0; x < 2; x++)
             {
-                for (int z = 0; z < layerSize; z++)
+                for (int z = 0; z < 2; z++)
                 {
-                    SpawnCubeWithRandomDirection(new Vector3Int(x + y, -y, z + y));
+                    SpawnCubeWithRandomDirection(new Vector3Int(trunkX + x, -y, trunkZ + z));
                     await UniTask.Delay(10);
                 }
             }
         }
-                
-            
-        
-               
-            
+           
         
     }
 
