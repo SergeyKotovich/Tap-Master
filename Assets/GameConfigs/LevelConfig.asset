@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25edbb03a979caf4c9e0a084fa43b528, type: 3}
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
-  <LevelVictoryReward>k__BackingField: 5
+  <MoneyPerCube>k__BackingField: 1
   <MoveMultiplier>k__BackingField: 1.1
   <TimeMultiplier>k__BackingField: 2
+  <PointsPerCube>k__BackingField: 5

@@ -7,15 +7,15 @@ public class Wallet : IDisposable, IMoneyHandler
     public event Action<int, int> AmountMoneyUpdated;
     public event Action MoneyWasNotEnough;
     public int Money { get; private set; }
-    private readonly WonMoneyController _wonMoneyController;
+    private readonly LevelResourceCounter _levelResourceCounter;
 
-    public Wallet(WonMoneyController wonMoneyController)
+    public Wallet(LevelResourceCounter levelResourceCounter)
     {
-        _wonMoneyController = wonMoneyController;
-        _wonMoneyController.WinningMoneyCalculated += AddMoney;
+        _levelResourceCounter = levelResourceCounter;
+        _levelResourceCounter.ResourceCountStart += AddMoney;
     }
 
-    private void AddMoney(int wonMoney, int value)
+    private void AddMoney(int wonMoney, int value, int points)
     {
         var startMoney = Money;
         Money += wonMoney;
@@ -45,6 +45,6 @@ public class Wallet : IDisposable, IMoneyHandler
     
     public void Dispose()
     {
-        _wonMoneyController.WinningMoneyCalculated -= AddMoney;
+        _levelResourceCounter.ResourceCountStart -= AddMoney;
     }
 }

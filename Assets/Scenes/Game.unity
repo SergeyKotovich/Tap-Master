@@ -10506,8 +10506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1854eac83482b14886ca7fd09472444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyAmountText: {fileID: 202131433}
-  _cubesAmountText: {fileID: 275693256}
+  _amountMoneyText: {fileID: 202131433}
+  _amountCubesText: {fileID: 275693256}
+  _amountPointsText: {fileID: 1238246641}
   _timeUpdateResources: 0.5
 --- !u!1 &920095267
 GameObject:
@@ -12111,7 +12112,7 @@ GameObject:
   - component: {fileID: 1067812102}
   - component: {fileID: 1067812105}
   - component: {fileID: 1067812104}
-  - component: {fileID: 1067812103}
+  - component: {fileID: 1067812106}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -12139,19 +12140,6 @@ RectTransform:
   m_AnchoredPosition: {x: -36.304, y: 566}
   m_SizeDelta: {x: 508.09, y: 82.927}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1067812103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1067812101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d177fb48efc461ea4108fa173c0c0e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movesCountLabel: {fileID: 597866094}
 --- !u!114 &1067812104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12190,6 +12178,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067812101}
   m_CullTransparentMesh: 1
+--- !u!114 &1067812106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067812101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b02286643f4ca7bac1bfb280ca6b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countPoints: {fileID: 597866094}
 --- !u!1 &1070064649
 GameObject:
   m_ObjectHideFlags: 0
@@ -13260,13 +13261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f661bdf68249278fcef6256a35cb98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceCounterView: {fileID: 910172496}
+  _levelResourceCounterView: {fileID: 910172496}
   _walletView: {fileID: 1183443276}
   _levelView: {fileID: 1383421145}
   _shopView: {fileID: 50865576}
   _inventoryView: {fileID: 958271116}
   _shopConfig: {fileID: 11400000, guid: 4ec2b3a87c00033429607e9b3464ff0b, type: 2}
   _movesCounterView: {fileID: 1344293194}
+  _scoreView: {fileID: 1067812106}
 --- !u!1 &1150058867
 GameObject:
   m_ObjectHideFlags: 0
@@ -21281,7 +21283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LevelNumber>k__BackingField: 0
   _level: []
-  _levelSpawnerConfig: {fileID: 11400000, guid: 516d37099903d4448bb6eadbe97c08fb, type: 2}
 --- !u!1 &1823459307
 GameObject:
   m_ObjectHideFlags: 0

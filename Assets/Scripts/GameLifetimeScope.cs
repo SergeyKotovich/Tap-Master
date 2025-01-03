@@ -26,10 +26,11 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
         builder.Register<EffectFactory>(Lifetime.Singleton);
-        builder.Register<WonMoneyController>(Lifetime.Singleton);
+        builder.Register<LevelResourceCounter>(Lifetime.Singleton);
         builder.Register<Inventory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Wallet>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<MovesCounter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<LevelTimer>(Lifetime.Singleton);
+        builder.Register<ScoreController>(Lifetime.Singleton);
     }
 }

@@ -13,11 +13,15 @@ public class GameController : MonoBehaviour
     private Level _currentLevel;
     private LevelTimer _levelTimer;
     private MovesCounter _movesCounter;
+    private ScoreController _scoreController;
+    
     private GameMod _gameMod;
+    
 
     [Inject]
-    public void Construct(MovesCounter movesCounter, LevelTimer levelTimer)
+    public void Construct(MovesCounter movesCounter, LevelTimer levelTimer, ScoreController scoreController)
     {
+        _scoreController = scoreController;
         _levelTimer = levelTimer;
         _movesCounter = movesCounter;
     }
