@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -14,19 +15,23 @@ public class GameController : MonoBehaviour
     private LevelTimer _levelTimer;
     private MovesCounter _movesCounter;
     private ScoreController _scoreController;
-    
+
     private GameMod _gameMod;
-    
+    private GameSaveManager _gameSaveManager;
+    private IMoneyRestorer _wallet;
 
     [Inject]
-    public void Construct(MovesCounter movesCounter, LevelTimer levelTimer, ScoreController scoreController)
+    public void Construct(MovesCounter movesCounter, LevelTimer levelTimer, ScoreController scoreController,
+        GameSaveManager gameSaveManager, IMoneyRestorer wallet)
     {
+        _wallet = wallet;
+        _gameSaveManager = gameSaveManager;
         _scoreController = scoreController;
         _levelTimer = levelTimer;
         _movesCounter = movesCounter;
     }
 
-    [UsedImplicitly]
+
     public void SetGameMod(int gameMod)
     {
         if (Enum.IsDefined(typeof(GameMod), gameMod))
@@ -34,7 +39,18 @@ public class GameController : MonoBehaviour
             _gameMod = (GameMod)gameMod;
         }
 
-        StartGame();
+        _scoreController.SetGameSettings(gameMod, 0);
+        LoadLevel();
+    }
+
+    public void SetGameSettings(GameData gameData)
+    {
+        _gameMod = gameData.GameMod;
+        _scoreController.SetGameSettings((int)_gameMod, gameData.Score);
+        _indexCurrentLevel = gameData.Level;
+        _wallet.Initialize(gameData.Money);
+        
+        LoadLevel();
     }
 
     public void LoadNextLevel()
@@ -59,15 +75,14 @@ public class GameController : MonoBehaviour
         LoadLevel();
     }
 
-    private void StartGame()
-    {
-        LoadLevel();
-    }
 
     private void LoadLevel()
     {
         _currentLevel = _levelsLoader.LoadLevel(_indexCurrentLevel);
         _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
+        _gameSaveManager.Save(new GameData(_indexCurrentLevel, _scoreController.CurrentCountPoints, _gameMod,
+            _wallet.Money));
+
         if (_gameMod == GameMod.Easy)
         {
             return;

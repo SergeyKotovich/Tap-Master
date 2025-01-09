@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using VContainer;
 
-public class Wallet : IDisposable, IMoneyHandler
+public class Wallet : IDisposable, IMoneyHandler , IMoneyRestorer
 {
     public event Action<int, int> AmountMoneyUpdated;
     public event Action MoneyWasNotEnough;
@@ -13,6 +13,12 @@ public class Wallet : IDisposable, IMoneyHandler
     {
         _levelResourceCounter = levelResourceCounter;
         _levelResourceCounter.ResourceCountStart += AddMoney;
+    }
+
+    public void Initialize(int money)
+    {
+        Money = money;
+        AmountMoneyUpdated?.Invoke(Money, Money);
     }
 
     private void AddMoney(int wonMoney, int value, int points)

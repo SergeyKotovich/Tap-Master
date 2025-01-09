@@ -13,6 +13,7 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private BackgroundsLoader _backgroundsLoader;
     [SerializeField] private List<Booster> _boosters;
     [SerializeField] private List<Background> _backgrounds;
+    [SerializeField] private GameController _gameController;
     
     protected override void Configure(IContainerBuilder builder)
     {
@@ -22,15 +23,17 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_boosters);
         builder.RegisterInstance(_backgrounds);
         builder.RegisterInstance(_backgroundsLoader);
+        builder.RegisterInstance(_gameController);
         
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
         builder.Register<EffectFactory>(Lifetime.Singleton);
-        builder.Register<LevelResourceCounter>(Lifetime.Singleton);
+        builder.Register<LevelResourceCounter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Inventory>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<Wallet>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<MovesCounter>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<LevelTimer>(Lifetime.Singleton);
         builder.Register<ScoreController>(Lifetime.Singleton);
+        builder.Register<GameSaveManager>(Lifetime.Singleton);
     }
 }

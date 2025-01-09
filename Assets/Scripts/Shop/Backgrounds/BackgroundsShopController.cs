@@ -5,6 +5,7 @@ public class BackgroundsShopController : MonoBehaviour
 {
     private List<Background> _backgrounds;
     private IMoneyHandler _moneyHandler;
+    public Background CurrentBackground { get; private set; }
 
     public void Initialize(ShopConfig shopConfig, IMoneyHandler moneyHandler, List<Background> backgrounds)
     {
@@ -22,7 +23,7 @@ public class BackgroundsShopController : MonoBehaviour
         {
             _moneyHandler.SpendMoney(background.Cost);
             background.MarkAsBought();
-            
+            CurrentBackground = background;
             return true;
         }
 
