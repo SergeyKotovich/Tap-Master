@@ -9,6 +9,7 @@ public class Skin : MonoBehaviour
     [SerializeField] private GameObject _cost;
     [field: SerializeField] public bool WasBought { get; private set; }
     public int Cost { get; private set; }
+    public bool IsActive { get; private set; }
 
     public void Initialize(ShopConfig shopConfig)
     {
@@ -29,5 +30,21 @@ public class Skin : MonoBehaviour
     public void EnableBackground()
     {
         _background.SetActive(true);
+    }
+
+    public void MarkAsActive()
+    {
+        IsActive = true;
+    }
+
+    public void MarkSkinAsInactive()
+    {
+        IsActive = false;
+    }
+
+    public void ApplyData(SkinSaveData skinSaveData)
+    {
+        WasBought = skinSaveData.WasBought;
+        IsActive = skinSaveData.IsActive;
     }
 }

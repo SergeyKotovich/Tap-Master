@@ -41,17 +41,17 @@ public class InventoryView : MonoBehaviour
 
     public void UpdateInfo(int levelNumber)
     {
-        if (levelNumber == _shopConfig.UnlockLevelForRocketBooster)
+        if (levelNumber >= _shopConfig.UnlockLevelForRocketBooster)
         {
             _rocketButton.gameObject.SetActive(true);
         }
 
-        if (levelNumber == _shopConfig.UnlockLevelForLaserBooster)
+        if (levelNumber >= _shopConfig.UnlockLevelForLaserBooster)
         {
             _laserButton.gameObject.SetActive(true);
         }
 
-        if (levelNumber == _shopConfig.UnlockLevelForBlackHoleBooster)
+        if (levelNumber >= _shopConfig.UnlockLevelForBlackHoleBooster)
         {
             _blackHoleButton.gameObject.SetActive(true);
         }

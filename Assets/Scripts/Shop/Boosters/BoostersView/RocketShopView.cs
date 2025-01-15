@@ -12,8 +12,7 @@ public class RocketShopView : BoosterShopView
 
     public override void CanUnlockBooster(int currentLevel)
     {
-        
-        if (currentLevel==_shopConfig.UnlockLevelForRocketBooster)
+        if (currentLevel >= _shopConfig.UnlockLevelForRocketBooster)
         {
             MakeAvailable();
         }

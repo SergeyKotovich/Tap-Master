@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Inventory : IInventoryHandler
 {
-    public event Action <Booster> CountBoostersChanged;
+    public event Action<Booster> CountBoostersChanged;
     public event Action<Booster> BoostersDepleted;
-    
+
     private readonly List<Booster> _boosters;
-    
+
     private readonly BackgroundsLoader _backgroundsLoader;
 
     public Inventory(List<Booster> boosters, BackgroundsLoader backgroundsLoader)
@@ -16,6 +17,7 @@ public class Inventory : IInventoryHandler
         _backgroundsLoader = backgroundsLoader;
         _boosters = boosters;
     }
+
     public void AddBooster(Booster booster)
     {
         if (_boosters.Any(item => booster.Type == item.Type))
@@ -27,12 +29,13 @@ public class Inventory : IInventoryHandler
 
     public void UseBooster(Booster booster)
     {
-        if (_boosters.Any(item =>booster.Type == item.Type))
+        if (_boosters.Any(item => booster.Type == item.Type))
         {
             if (!booster.HasBooster())
             {
                 return;
             }
+
             booster.SpendBooster();
             CountBoostersChanged?.Invoke(booster);
             if (!booster.HasBooster())
@@ -45,5 +48,10 @@ public class Inventory : IInventoryHandler
     public void UseBackground(Background background)
     {
         _backgroundsLoader.SetBackground(background.Type);
+    }
+
+    public void LoadSaveData(Booster booster)
+    {
+        CountBoostersChanged?.Invoke(booster);
     }
 }

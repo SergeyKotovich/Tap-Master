@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -19,11 +18,13 @@ public class GameController : MonoBehaviour
     private GameMod _gameMod;
     private GameSaveManager _gameSaveManager;
     private IMoneyRestorer _wallet;
+    private ShopController _shopController;
 
     [Inject]
     public void Construct(MovesCounter movesCounter, LevelTimer levelTimer, ScoreController scoreController,
-        GameSaveManager gameSaveManager, IMoneyRestorer wallet)
+        GameSaveManager gameSaveManager, IMoneyRestorer wallet, ShopController shopController)
     {
+        _shopController = shopController;
         _wallet = wallet;
         _gameSaveManager = gameSaveManager;
         _scoreController = scoreController;
@@ -49,7 +50,8 @@ public class GameController : MonoBehaviour
         _scoreController.SetGameSettings((int)_gameMod, gameData.Score);
         _indexCurrentLevel = gameData.Level;
         _wallet.Initialize(gameData.Money);
-        
+        _shopController.LoadSaveData(gameData);
+
         LoadLevel();
     }
 
@@ -79,10 +81,10 @@ public class GameController : MonoBehaviour
     private void LoadLevel()
     {
         _currentLevel = _levelsLoader.LoadLevel(_indexCurrentLevel);
-        _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
         _gameSaveManager.Save(new GameData(_indexCurrentLevel, _scoreController.CurrentCountPoints, _gameMod,
-            _wallet.Money));
-
+            _wallet.Money, _shopController.GetDataSkins(), _shopController.GetDataBackgrounds(), _shopController.GetDataBoosters()));
+        _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
+        
         if (_gameMod == GameMod.Easy)
         {
             return;

@@ -7,6 +7,7 @@ public class Background : MonoBehaviour
     [field: SerializeField] public BackgroundsType Type { get; private set; }
     public int Cost { get; private set; }
     public bool WasBought { get; private set; }
+    public bool IsActive { get; private set; }
 
     public void MarkAsBought()
     {
@@ -23,5 +24,19 @@ public class Background : MonoBehaviour
         }
 
         Cost = shopConfig.CostStandardBackground;
+    }
+    public void MarkAsActive()
+    {
+        IsActive = true;
+    }
+
+    public void MarkAsInactive()
+    {
+        IsActive = false;
+    }
+    public void ApplyData(BackgroundSaveData backgroundSaveData)
+    {
+        WasBought = backgroundSaveData.WasBought;
+        IsActive = backgroundSaveData.IsActive;
     }
 }

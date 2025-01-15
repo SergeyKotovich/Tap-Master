@@ -9,9 +9,10 @@ public class LaserShopView : BoosterShopView
         _costUnlockBooster.text = shopConfig.CostUnlockLaser.ToString();
         _unlockLevel.text = shopConfig.UnlockLevelForLaserBooster.ToString();
     }
+
     public override void CanUnlockBooster(int currentLevel)
     {
-        if (currentLevel==_shopConfig.UnlockLevelForLaserBooster)
+        if (currentLevel >= _shopConfig.UnlockLevelForLaserBooster)
         {
             MakeAvailable();
         }

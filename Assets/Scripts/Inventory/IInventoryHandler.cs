@@ -7,5 +7,6 @@ public interface IInventoryHandler
     void AddBooster(Booster booster);
     void UseBooster(Booster booster);
     void UseBackground(Background background);
+    void LoadSaveData(Booster booster);
 
 }

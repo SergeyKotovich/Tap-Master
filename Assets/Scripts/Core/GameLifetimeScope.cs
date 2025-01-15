@@ -14,7 +14,9 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private List<Booster> _boosters;
     [SerializeField] private List<Background> _backgrounds;
     [SerializeField] private GameController _gameController;
-    
+    [SerializeField] private List<Skin> _skins;
+    [SerializeField] private ShopController _shopController;
+
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterInstance(_shakeAnimationController);
@@ -24,6 +26,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_backgrounds);
         builder.RegisterInstance(_backgroundsLoader);
         builder.RegisterInstance(_gameController);
+        builder.RegisterInstance(_skins);
+        builder.RegisterInstance(_shopController);
         
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);

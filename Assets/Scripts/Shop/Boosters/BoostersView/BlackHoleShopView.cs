@@ -12,7 +12,7 @@ public class BlackHoleShopView : BoosterShopView
 
     public override void CanUnlockBooster(int currentLevel)
     {
-        if (currentLevel==_shopConfig.UnlockLevelForBlackHoleBooster)
+        if (currentLevel >= _shopConfig.UnlockLevelForBlackHoleBooster)
         {
             MakeAvailable();
         }

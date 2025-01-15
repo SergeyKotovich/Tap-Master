@@ -6,8 +6,12 @@ using UnityEngine.Video;
 public class BackgroundsLoader : MonoBehaviour
 {
     [SerializeField] private VideoPlayer _videoPlayerAnotherPlanet;
+    [SerializeField] private Transform _background;
 
     private readonly Dictionary<Enum, string> _videos = new();
+    private readonly Vector3 _sizeSaturn = new(100, 100, 100);
+    private readonly  Vector3 _sizeAnotherPlanet = new(150, 100, 100);
+    private readonly Vector3 _positionAnotherPlanet =new(-0.2f, 0, 0);
 
     private BackgroundsType _currentType = BackgroundsType.Earth;
 
@@ -33,6 +37,17 @@ public class BackgroundsLoader : MonoBehaviour
         if (_currentType == type)
         {
             return;
+        }
+
+        if (type == BackgroundsType.Saturn)
+        {
+            _background.localScale = _sizeSaturn;
+            _background.localPosition = Vector3.zero;
+        }
+        else
+        {
+            _background.localScale = _sizeAnotherPlanet;
+            _background.localPosition = _positionAnotherPlanet;
         }
 
         var value = _videos[type];
