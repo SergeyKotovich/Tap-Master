@@ -6,11 +6,11 @@ using DG.Tweening;
 using UniTaskPubSub;
 using UnityEngine;
 
-public class Level : MonoBehaviour, ILevelProvider, ICountCubesProvider
+public class Level : MonoBehaviour, ICountCubesProvider
 {
     [field: SerializeField] public int LevelNumber { get; private set; }
     [SerializeField] private List<Cube.Cube> _level;
-    
+
     private readonly List<Vector3> _cubesTargetPositions = new();
     private readonly float _duration = 0.3f;
     private readonly int _startCubePosition = 13;
@@ -27,7 +27,6 @@ public class Level : MonoBehaviour, ILevelProvider, ICountCubesProvider
         {
             cube.Initialize(obstacleDetector, shakeAnimationController, effectFactory, messageBus);
         }
-
         _messageBus = messageBus;
         _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
         CountCubes = _level.Count;
@@ -60,12 +59,15 @@ public class Level : MonoBehaviour, ILevelProvider, ICountCubesProvider
         Destroy(gameObject);
     }
 
-    private async UniTask SetStartPositionsCubes()
+    private void SetStartPositionsCubes()
     {
-        for (int i = 0; i < _level.Count; i++)
+        for (var i = 0; i < _level.Count; i++)
         {
+            if (_level[i] == null)
+            {
+                continue;
+            }
             _level[i].transform.DOLocalMove(_cubesTargetPositions[i], _duration);
-            await UniTask.NextFrame();
         }
     }
 
@@ -95,7 +97,7 @@ public class Level : MonoBehaviour, ILevelProvider, ICountCubesProvider
             _level[i].transform.position = startPosition;
         }
 
-        SetStartPositionsCubes().Forget();
+        SetStartPositionsCubes();
     }
 
     private void OnDestroy()

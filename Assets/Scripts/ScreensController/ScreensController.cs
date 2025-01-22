@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UniTaskPubSub;
 using UnityEngine;
+using UnityEngine.Events;
 using VContainer;
 
 namespace ScreensController
 {
     public class ScreensController : MonoBehaviour
     {
+        [SerializeField] private UnityEvent OnCloseLevelScreen;
         [SerializeField] private GameObject _victoryScreen;
         [SerializeField] private GameObject _defeatScreen;
 
@@ -20,6 +22,12 @@ namespace ScreensController
         {
             _subscriptions.Add(messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen()));
             _subscriptions.Add(messageBus.Subscribe<LevelFailedEvent>(_ => ShowDefeatScreen()));
+            _subscriptions.Add(messageBus.Subscribe<LevelSelectedEvent>(_ => CloseLevelScreen()));
+        }
+
+        private void CloseLevelScreen()
+        {
+            OnCloseLevelScreen?.Invoke();
         }
 
         private async UniTask ShowDefeatScreen()
@@ -29,6 +37,7 @@ namespace ScreensController
             {
                 return;
             }
+
             _defeatScreen.SetActive(true);
         }
 
@@ -46,6 +55,7 @@ namespace ScreensController
             {
                 return;
             }
+
             foreach (var subscription in _subscriptions)
             {
                 subscription.Dispose();

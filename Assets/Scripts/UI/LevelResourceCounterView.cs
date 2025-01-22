@@ -36,11 +36,14 @@ public class LevelResourceCounterView : MonoBehaviour
             _startAmountMoney, wonMoney).Forget();
 
         ResourceCounterUtility.CountResources(_amountPointsText, _timeUpdateResources,
-                _startAmountPoints, wonPoints).Forget();
+            _startAmountPoints, wonPoints).Forget();
     }
 
     private void OnDestroy()
     {
-        _levelResourceCounter.ResourceCountStart -= ShowCountingResources;
+        if (_levelResourceCounter != null)
+        {
+            _levelResourceCounter.ResourceCountStart -= ShowCountingResources;
+        }
     }
 }

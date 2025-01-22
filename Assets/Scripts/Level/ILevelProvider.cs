@@ -1,4 +1,7 @@
-public interface ILevelProvider
+using System;
+
+public interface ILevelsProvider
 {
-    public int LevelNumber { get; }
+    public event Action<int> LevelOpened; 
+    public int Levels { get; }
 }

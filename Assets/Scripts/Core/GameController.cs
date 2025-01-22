@@ -1,37 +1,51 @@
 using System;
 using JetBrains.Annotations;
+using UniTaskPubSub;
 using UnityEngine;
 using VContainer;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private LevelsLoader _levelsLoader;
-    [SerializeField] private UIController _uiController;
+    private GameSaveManager _gameSaveManager;
+    private IMoneyRestorer _wallet;
+    private ShopController _shopController;
+    private LevelsLoader _levelsLoader;
+    private UIController _uiController;
+    private ScoreController _scoreController;
 
     private int _indexCurrentLevel;
 
     private Level _currentLevel;
+
     private LevelTimer _levelTimer;
     private MovesCounter _movesCounter;
-    private ScoreController _scoreController;
 
     private GameMod _gameMod;
-    private GameSaveManager _gameSaveManager;
-    private IMoneyRestorer _wallet;
-    private ShopController _shopController;
+    
+    private IDisposable _subscription;
+
 
     [Inject]
     public void Construct(MovesCounter movesCounter, LevelTimer levelTimer, ScoreController scoreController,
-        GameSaveManager gameSaveManager, IMoneyRestorer wallet, ShopController shopController)
+        GameSaveManager gameSaveManager, IMoneyRestorer wallet, ShopController shopController,
+        LevelsLoader levelsLoader, UIController uiController, AsyncMessageBus messageBus)
     {
+        _subscription = messageBus.Subscribe<LevelSelectedEvent>(OnLevelSelected);
         _shopController = shopController;
         _wallet = wallet;
         _gameSaveManager = gameSaveManager;
         _scoreController = scoreController;
         _levelTimer = levelTimer;
         _movesCounter = movesCounter;
+        _levelsLoader = levelsLoader;
+        _uiController = uiController;
     }
 
+    private void OnLevelSelected(LevelSelectedEvent data)
+    {
+        _indexCurrentLevel = data.IndexLevel;
+        LoadLevel();
+    }
 
     public void SetGameMod(int gameMod)
     {
@@ -80,11 +94,17 @@ public class GameController : MonoBehaviour
 
     private void LoadLevel()
     {
+        if (_currentLevel != null)
+        {
+            _currentLevel.DestroyLevel();
+        }
+
         _currentLevel = _levelsLoader.LoadLevel(_indexCurrentLevel);
         _gameSaveManager.Save(new GameData(_indexCurrentLevel, _scoreController.CurrentCountPoints, _gameMod,
-            _wallet.Money, _shopController.GetDataSkins(), _shopController.GetDataBackgrounds(), _shopController.GetDataBoosters()));
+            _wallet.Money, _shopController.GetDataSkins(), _shopController.GetDataBackgrounds(),
+            _shopController.GetDataBoosters()));
         _uiController.UpdateLevelInfo(_currentLevel.LevelNumber);
-        
+
         if (_gameMod == GameMod.Easy)
         {
             return;
@@ -97,5 +117,10 @@ public class GameController : MonoBehaviour
         }
 
         _levelTimer.EnableTimer(_currentLevel.CountCubes);
+    }
+
+    private void OnDestroy()
+    {
+        _subscription?.Dispose();
     }
 }

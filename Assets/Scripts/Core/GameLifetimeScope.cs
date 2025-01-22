@@ -16,6 +16,8 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private GameController _gameController;
     [SerializeField] private List<Skin> _skins;
     [SerializeField] private ShopController _shopController;
+    [SerializeField] private LevelsLoader _levelsLoader;
+    [SerializeField] private UIController _uiController;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -28,6 +30,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_gameController);
         builder.RegisterInstance(_skins);
         builder.RegisterInstance(_shopController);
+        builder.RegisterInstance(_levelsLoader).AsSelf().AsImplementedInterfaces();
+        builder.RegisterInstance(_uiController);
         
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
