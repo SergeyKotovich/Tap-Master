@@ -2729,7 +2729,6 @@ MonoBehaviour:
   - {fileID: 1899106620}
   - {fileID: 1209295128}
   - {fileID: 1979067937}
-  - {fileID: 605562383}
   _shakeAnimationController: {fileID: 487649664}
   _flyEffectPrefab: {fileID: 5737998239862026281, guid: 42665d8273ec7e64c982ceb4df495854, type: 3}
   _levelConfig: {fileID: 11400000, guid: dfdc04df2c5008e498dae76f4616de81, type: 2}
@@ -2754,6 +2753,7 @@ MonoBehaviour:
   _shopController: {fileID: 50865577}
   _levelsLoader: {fileID: 398286695}
   _uiController: {fileID: 1149992405}
+  _managerAvailableLevels: {fileID: 605562388}
 --- !u!1 &201477219
 GameObject:
   m_ObjectHideFlags: 0

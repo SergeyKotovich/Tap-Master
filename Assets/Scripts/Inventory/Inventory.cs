@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 public class Inventory : IInventoryHandler
 {
@@ -52,6 +51,9 @@ public class Inventory : IInventoryHandler
 
     public void LoadSaveData(Booster booster)
     {
-        CountBoostersChanged?.Invoke(booster);
+        if (booster.HasBooster())
+        {
+            CountBoostersChanged?.Invoke(booster);
+        }
     }
 }

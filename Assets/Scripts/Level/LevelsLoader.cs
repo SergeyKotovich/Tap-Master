@@ -27,7 +27,10 @@ public class LevelsLoader : MonoBehaviour, ILevelsProvider
         _obstacleDetector = obstacleDetector;
     }
 
-
+    public void SetLoadData(int currentIndexLevel)
+    {
+        _currentIndexLevel = currentIndexLevel;
+    }
     public Level LoadLevel(int indexLevel)
     {
         
@@ -36,7 +39,6 @@ public class LevelsLoader : MonoBehaviour, ILevelsProvider
             Debug.Log("Levels is over");
             return null;
         }
-
         if (indexLevel > _currentIndexLevel)
         {
             _currentIndexLevel = indexLevel;
@@ -45,6 +47,7 @@ public class LevelsLoader : MonoBehaviour, ILevelsProvider
         
         var currentLevel = Instantiate(_levels[indexLevel], _parentLevel);
         currentLevel.Initialize(_obstacleDetector, _shakeAnimationController, _effectFactory, _messageBus);
+        
         return currentLevel;
     }
 }

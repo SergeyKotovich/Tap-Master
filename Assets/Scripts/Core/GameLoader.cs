@@ -11,10 +11,12 @@ public class GameLoader : MonoBehaviour
     
     private GameSaveManager _gameSaveManager;
     private GameController _gameController;
+    private ScenesLoader _scenesLoader;
 
     [Inject]
-    public void Construct(GameSaveManager gameSaveManager, GameController gameController)
+    public void Construct(GameSaveManager gameSaveManager, GameController gameController, ScenesLoader scenesLoader)
     {
+        _scenesLoader = scenesLoader;
         _gameController = gameController;
         _gameSaveManager = gameSaveManager;
     }
@@ -39,5 +41,6 @@ public class GameLoader : MonoBehaviour
     public void ResetData()
     {
         _gameSaveManager.ResetData();
+        _scenesLoader.ReloadGame();
     }
 }

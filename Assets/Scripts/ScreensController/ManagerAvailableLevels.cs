@@ -3,7 +3,7 @@ using UniTaskPubSub;
 using UnityEngine;
 using VContainer;
 
-public class LevelScreenController : MonoBehaviour
+public class ManagerAvailableLevels : MonoBehaviour
 {
     [SerializeField] private LevelButtonManager _plateLevelPrefab;
     [SerializeField] private Transform _parent;
@@ -25,6 +25,20 @@ public class LevelScreenController : MonoBehaviour
         InitializeLevelsScreen();
         UpdateAvailableLevels(0);
     }
+    
+    public List<int> GetAvailableLevels()
+    {
+        return _availableLevels;
+    }
+
+    public void LoadSaveData(List<int> availableLevels)
+    {
+        _availableLevels = availableLevels;
+        for (var i = 0; i < _availableLevels.Count; i++)
+        {
+            _levelPlates[i].SwitchLevelAccess(_availableLevels[i]);
+        }
+    }
 
     private void UpdateAvailableLevels(int indexLevel)
     {
@@ -34,10 +48,10 @@ public class LevelScreenController : MonoBehaviour
 
     private void InitializeLevelsScreen()
     {
-        for (var i = 0; i < _allLevels; i++)
+        for (var indexLevel = 0; indexLevel < _allLevels; indexLevel++)
         {
            var levelPlate = Instantiate(_plateLevelPrefab, _parent);
-           levelPlate.Initialize(_messageBus, i);
+           levelPlate.Initialize(_messageBus, indexLevel);
            _levelPlates.Add(levelPlate);
         }
     }

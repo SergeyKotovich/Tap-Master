@@ -11,10 +11,10 @@ public class LevelButtonManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _numberLevel;
     private AsyncMessageBus _messageBus;
 
-    public void Initialize(AsyncMessageBus messageBus, int numberLevel)
+    public void Initialize(AsyncMessageBus messageBus, int indexLevel)
     {
         _messageBus = messageBus;
-        _openLevel.onClick.AddListener(() => OnLevelButtonClicked(numberLevel));
+        _openLevel.onClick.AddListener(() => OnLevelButtonClicked(indexLevel));
     }
 
     public void SwitchLevelAccess(int indexLevel)
@@ -28,8 +28,8 @@ public class LevelButtonManager : MonoBehaviour
     {
         _numberLevel.text = numberLevel.ToString();
     }
-    private void OnLevelButtonClicked(int numberLevel)
+    private void OnLevelButtonClicked(int indexLevel)
     {
-        _messageBus.Publish(new LevelSelectedEvent(numberLevel));
+        _messageBus.Publish(new LevelSelectedEvent(indexLevel));
     }
 }
