@@ -10,16 +10,19 @@ namespace ScreensController
 {
     public class ScreensController : MonoBehaviour
     {
-        [SerializeField] private UnityEvent OnCloseLevelScreen;
+        [SerializeField] private UnityEvent _onCloseLevelScreen;
         [SerializeField] private GameObject _victoryScreen;
         [SerializeField] private GameObject _defeatScreen;
 
         private readonly List<IDisposable> _subscriptions = new();
         private bool _levelCompleted;
+        
+        private ScreenInteractionManager _screenInteractionManager;
 
         [Inject]
-        public void Construct(AsyncMessageBus messageBus)
+        public void Construct(AsyncMessageBus messageBus, ScreenInteractionManager screenInteractionManager)
         {
+            _screenInteractionManager = screenInteractionManager;
             _subscriptions.Add(messageBus.Subscribe<LevelCompleteEvent>(_ => ShowVictoryScreen()));
             _subscriptions.Add(messageBus.Subscribe<LevelFailedEvent>(_ => ShowDefeatScreen()));
             _subscriptions.Add(messageBus.Subscribe<LevelSelectedEvent>(_ => CloseLevelScreen()));
@@ -27,24 +30,28 @@ namespace ScreensController
 
         private void CloseLevelScreen()
         {
-            OnCloseLevelScreen?.Invoke();
+            _onCloseLevelScreen?.Invoke();
         }
 
         private async UniTask ShowDefeatScreen()
         {
             await UniTask.Delay(600);
+            
             if (_levelCompleted)
             {
                 return;
             }
-
+            SoundsManager.Instance.PlayDefeat();
             _defeatScreen.SetActive(true);
+            _screenInteractionManager.EnableInteraction(false);
         }
 
         private async UniTask ShowVictoryScreen()
         {
             _levelCompleted = true;
             _victoryScreen.SetActive(true);
+            SoundsManager.Instance.PlayVictory();
+            _screenInteractionManager.EnableInteraction(false);
             await UniTask.Delay(1000);
             _levelCompleted = false;
         }

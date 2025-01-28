@@ -35,6 +35,7 @@ public class RocketShot : MonoBehaviour
     public void ActivateRocket()
     {
         Shot().Forget();
+        SoundsManager.Instance.PlayShotRocket();
     }
 
     private async UniTask Shot()

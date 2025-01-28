@@ -1,4 +1,3 @@
-using System;
 using Cube;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -20,6 +19,7 @@ public class Rocket : MonoBehaviour
         {
             other.GetComponent<ICubeDestroyer>().DestroyCube();
             var hitPoint = other.ClosestPoint(transform.position);
+            SoundsManager.Instance.PlayExplosion();
             _explosiveSmoke.transform.position = hitPoint;
             _explosiveSmoke.SetActive(true);
             gameObject.SetActive(false);

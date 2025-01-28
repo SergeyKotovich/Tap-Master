@@ -49,8 +49,8 @@ public class CameraZoom : MonoBehaviour
         }
     }
 
-    public void SwitchFlag()
+    public void EnableZoom(bool value)
     {
-        _isActive = !_isActive;
+        _isActive = value;
     }
 }

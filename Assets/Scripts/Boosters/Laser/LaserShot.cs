@@ -49,6 +49,7 @@ public class LaserShot : MonoBehaviour
         var laser = _laserPool.Get();
         var shootDirection = (targetPosition - transform.position).normalized;
         laser.AddForce(shootDirection * _shootForce, ForceMode.Impulse);
+        SoundsManager.Instance.PlayShotLaser();
         await UniTask.Delay(_delay);
         _laserPool.Release(laser);
     }

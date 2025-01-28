@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
@@ -8,6 +9,8 @@ public class GameLoader : MonoBehaviour
     [SerializeField] private GameObject _difficultySelectionMenu;
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _gameScreen;
+    [SerializeField] private GameObject _moveCounter;
+    [SerializeField] private GameObject _timer;
     
     private GameSaveManager _gameSaveManager;
     private GameController _gameController;
@@ -20,6 +23,7 @@ public class GameLoader : MonoBehaviour
         _gameController = gameController;
         _gameSaveManager = gameSaveManager;
     }
+    
 
     [UsedImplicitly]
     public void StartGame()
@@ -31,6 +35,16 @@ public class GameLoader : MonoBehaviour
             _gameController.SetGameSettings(gameData);
             _mainMenu.SetActive(false);
             _gameScreen.SetActive(true);
+            switch (gameData.GameMod)
+            {
+                case GameMod.Easy:
+                    _moveCounter.SetActive(false);
+                    _timer.SetActive(false);
+                    break;
+                case GameMod.Normal:
+                    _timer.SetActive(false);
+                    break;
+            }
         }
         else
         {

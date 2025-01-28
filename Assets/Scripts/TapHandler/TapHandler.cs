@@ -54,6 +54,7 @@ public class TapHandler : MonoBehaviour
                 }
 
                 cube.TryMove();
+                SoundsManager.Instance.PlayClick();
             }
         }
     }

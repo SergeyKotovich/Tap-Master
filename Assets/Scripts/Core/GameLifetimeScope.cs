@@ -19,6 +19,7 @@ public class GameLifetimeScope : LifetimeScope
     [SerializeField] private LevelsLoader _levelsLoader;
     [SerializeField] private UIController _uiController;
     [SerializeField] private ManagerAvailableLevels _managerAvailableLevels;
+    [SerializeField] private ScreenInteractionManager _screenInteractionManager;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -34,7 +35,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_levelsLoader).AsSelf().AsImplementedInterfaces();
         builder.RegisterInstance(_uiController);
         builder.RegisterInstance(_managerAvailableLevels);
-        
+        builder.RegisterInstance(_screenInteractionManager);
+
         builder.Register<AsyncMessageBus>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         builder.Register<ObstacleDetector>(Lifetime.Singleton);
         builder.Register<EffectFactory>(Lifetime.Singleton);

@@ -18,8 +18,6 @@ namespace BlackHole
         
         private Vector3 _direction;
         private Vector3[] _offsets;
-        
-
 
         private void Start()
         {
@@ -50,6 +48,7 @@ namespace BlackHole
     
         public void EnableBlackHole()
         {
+            SoundsManager.Instance.PlayBlackHole();
             transform.DOScale(_startScale, _duration);
             FindTargets();
             GravitationalPull();

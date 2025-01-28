@@ -10,6 +10,7 @@ namespace BlackHole
             if (other.CompareTag(GlobalConstants.CUBE_TAG))
             {
                 other.GetComponent<ICubeDestroyer>().DestroyCube();
+                SoundsManager.Instance.PlayDestroyCubeInHole();
             }
         }
     }

@@ -21,6 +21,7 @@ public class ShakeAnimationController : MonoBehaviour
             var hit = _hitsShakeAnimation[i];
             var scaleTarget = hit.transform.localScale;
             hit.transform.DOPunchScale(scaleTarget * 0.5f, _obstacleShakeDuration);
+            SoundsManager.Instance.PlayShakeSound();
             hit.transform.DOScale(scaleTarget, _obstacleShakeDuration);
             await UniTask.Delay(40);
         }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
   <MoneyPerCube>k__BackingField: 2
-  <MoveMultiplier>k__BackingField: 1.1
+  <MoveMultiplier>k__BackingField: 1.2
   <TimeMultiplier>k__BackingField: 2
   <PointsPerCube>k__BackingField: 5
