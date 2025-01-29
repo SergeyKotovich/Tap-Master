@@ -18,6 +18,7 @@ public class SoundsManager : MonoBehaviour
     [SerializeField] private AudioClip _explosion;
     [SerializeField] private AudioClip _blackHole;
     [SerializeField] private AudioClip _destroyCubeInHole;
+    [SerializeField] private AudioClip _laserHit;
 
     public static SoundsManager Instance { get; private set; }
 
@@ -94,5 +95,10 @@ public class SoundsManager : MonoBehaviour
     {
         _soundsSource.mute = !_soundsSource.mute;
         _musicSource.mute = !_musicSource.mute;
+    }
+
+    public void PlayLaserHit()
+    {
+        _soundsSource.PlayOneShot(_laserHit);
     }
 }

@@ -1,17 +1,15 @@
 using System;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UniTaskPubSub;
 using UnityEngine;
 using VContainer;
 
 public class Rotator : MonoBehaviour
 {
-    [SerializeField]
-    private float _sensitivity;
+    [SerializeField] private float _sensitivity = 1f;
 
-    private bool CanRotate = true;
+    private bool _canRotate = true;
     private IDisposable _subscriptions;
+    private Vector2 _previousTouchPosition;
 
     [Inject]
     public void Construct(AsyncMessageBus messageBus)
@@ -26,30 +24,56 @@ public class Rotator : MonoBehaviour
 
     private void Update()
     {
+        if (!_canRotate) return;
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+        HandleMouseInput();
+#elif UNITY_ANDROID || UNITY_IOS
+        HandleTouchInput();
+#endif
+    }
+
+    private void HandleMouseInput()
+    {
         if (!Input.GetMouseButton(0)) return;
 
-        if (CanRotate)
+        var rotationX = Input.GetAxis("Mouse X") * _sensitivity;
+        var rotationY = Input.GetAxis("Mouse Y") * _sensitivity;
+
+        Rotate(rotationX, rotationY);
+    }
+
+    private void HandleTouchInput()
+    {
+        if (Input.touchCount != 1) return;
+
+        var touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Began)
         {
-            var rotationX = Input.GetAxis("Mouse X") * _sensitivity;
-            var rotationY = Input.GetAxis("Mouse Y") * _sensitivity;
-            
-            transform.RotateAround(transform.position, Vector3.up, -rotationX);
-            transform.RotateAround(transform.position, Vector3.right, rotationY);
+            _previousTouchPosition = touch.position;
+        }
+        else if (touch.phase == TouchPhase.Moved)
+        {
+            var delta = touch.position - _previousTouchPosition;
+            _previousTouchPosition = touch.position;
+
+            var rotationX = delta.x * _sensitivity * 0.1f;
+            var rotationY = delta.y * _sensitivity * 0.1f;
+
+            Rotate(rotationX, rotationY);
         }
     }
 
-    public void RotateAround()
+    private void Rotate(float rotationX, float rotationY)
     {
-        var currentRotate = transform.eulerAngles;
-        currentRotate.y += 600;
-        currentRotate.x += 600;
-        transform.DORotate(currentRotate, 4f,RotateMode.FastBeyond360);
-
+        transform.RotateAround(transform.position, Vector3.up, -rotationX);
+        transform.RotateAround(transform.position, Vector3.right, rotationY);
     }
-    
+
     public void RotateEnabled(bool onOff)
     {
-        CanRotate = onOff;
+        _canRotate = onOff;
     }
 
     private void OnDestroy()

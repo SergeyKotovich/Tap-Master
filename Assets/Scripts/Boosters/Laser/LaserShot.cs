@@ -2,11 +2,13 @@ using System;
 using Cysharp.Threading.Tasks;
 using UniTaskPubSub;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 using VContainer;
 
 public class LaserShot : MonoBehaviour
 {
+    public UnityEvent OnLaserShot;
     [SerializeField] private Rigidbody _laserPrefab;
     [SerializeField] private float _shootForce;
     private int _delay = 7000;
@@ -31,6 +33,7 @@ public class LaserShot : MonoBehaviour
         laser.gameObject.SetActive(false);
         laser.transform.position = transform.position;
         laser.transform.rotation = Quaternion.identity;
+        laser.velocity = Vector3.zero;
     }
 
     private void Get(Rigidbody laser)
@@ -46,6 +49,7 @@ public class LaserShot : MonoBehaviour
 
     private async UniTask Shot(Vector3 targetPosition)
     {
+        OnLaserShot?.Invoke();
         var laser = _laserPool.Get();
         var shootDirection = (targetPosition - transform.position).normalized;
         laser.AddForce(shootDirection * _shootForce, ForceMode.Impulse);

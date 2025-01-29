@@ -9,6 +9,7 @@ public class LaserTrigger : MonoBehaviour
         if (other.gameObject.CompareTag(GlobalConstants.CUBE_TAG))
         {
             other.GetComponent<ICubeDestroyer>().DestroyCube();
+            SoundsManager.Instance.PlayLaserHit();
         }
     }
     

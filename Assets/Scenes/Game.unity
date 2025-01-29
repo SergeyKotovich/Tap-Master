@@ -455,6 +455,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1070064650}
+        m_TargetAssemblyTypeName: Rotator, Assembly-CSharp
+        m_MethodName: RotateEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &32867006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,7 +1663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _zoomSpeed: 25
-  _swipePanSpeed: 10
   _minFOV: 70
   _maxFOV: 100
 --- !u!4 &103150020
@@ -3855,9 +3866,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 752501721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 670, y: -221}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &257629994
@@ -5595,6 +5606,7 @@ MonoBehaviour:
   _explosion: {fileID: 8300000, guid: 56cdb36f1a0147440890d420d24ce29b, type: 3}
   _blackHole: {fileID: 8300000, guid: a2f489eccfa043e4e8a3b1e1e067817b, type: 3}
   _destroyCubeInHole: {fileID: 8300000, guid: f63dda7e7031d804ea50495873804fbe, type: 3}
+  _laserHit: {fileID: 8300000, guid: 4578dd95049135b4486a7c220f3d3480, type: 3}
 --- !u!4 &364588645
 Transform:
   m_ObjectHideFlags: 0
@@ -10779,7 +10791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &910172495
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13036,9 +13048,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 752501721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 380, y: -221}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 280, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088426055
@@ -19128,9 +19140,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 752501721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90, y: -221}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1599830259
@@ -22808,7 +22820,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1899106622}
   - component: {fileID: 1899106621}
-  - component: {fileID: 1899106623}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -22828,8 +22839,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676def9ede5379f4ca2249dc7d2558ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLaserShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1070064650}
+        m_TargetAssemblyTypeName: Rotator, Assembly-CSharp
+        m_MethodName: RotateEnabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _laserPrefab: {fileID: -2381589078335435850, guid: 66a1f7e9f9faf614ba0d52bbf60639f2, type: 3}
-  _shootForce: 30
+  _shootForce: 50
 --- !u!4 &1899106622
 Transform:
   m_ObjectHideFlags: 0
@@ -22845,102 +22871,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1557201498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1899106623
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899106620}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1914762031
 GameObject:
   m_ObjectHideFlags: 0
@@ -23459,7 +23389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1979067941
 RectTransform:
   m_ObjectHideFlags: 0
