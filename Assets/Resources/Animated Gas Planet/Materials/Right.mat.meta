@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6bf44800244a10643b1ce86c88666754
+timeCreated: 1496172334
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92133
+  packageName: Animated Gas Planet
+  packageVersion: 1.0
+  assetPath: Assets/Animated Gas Planet/Materials/Right.mat
+  uploadId: 183348

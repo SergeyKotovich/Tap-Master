@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3f878c0c7950f3945b9c58b2f1c3b71b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 156548
+  packageName: Dark Singularity
+  packageVersion: 1.0
+  assetPath: Assets/Dark Singularity/Core Scripts/SingularityPullable.cs
+  uploadId: 336717

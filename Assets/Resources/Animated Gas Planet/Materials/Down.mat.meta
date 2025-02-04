@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17295a571d6b936409de6f545895489f
+timeCreated: 1496431798
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 92133
+  packageName: Animated Gas Planet
+  packageVersion: 1.0
+  assetPath: Assets/Animated Gas Planet/Materials/Down.mat
+  uploadId: 183348
