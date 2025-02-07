@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cube;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UniTaskPubSub;
 using UnityEngine;
@@ -18,7 +17,6 @@ public class Level : MonoBehaviour, ICountCubesProvider
     public int CountCubes { get; private set; }
     private IDisposable _subscriptions;
     private AsyncMessageBus _messageBus;
-    private readonly int _millisecondsDelay = 500;
 
     public void Initialize(ObstacleDetector obstacleDetector, ShakeAnimationController shakeAnimationController,
         EffectFactory effectFactory, AsyncMessageBus messageBus)
@@ -31,15 +29,15 @@ public class Level : MonoBehaviour, ICountCubesProvider
         _subscriptions = messageBus.Subscribe<CubeWasDestroyedEvent>(_ => UpdateCountCubes());
         CountCubes = _level.Count;
 
-        if (LevelNumber > 10)
-        {
-            return;
-        }
+     //  if (LevelNumber > 10)
+     //  {
+     //      return;
+     //  }
 
-        ScatterCubes();
+     //  ScatterCubes();
     }
 
-    private async UniTask UpdateCountCubes()
+    private void UpdateCountCubes()
     {
         if (CountCubes > 0)
         {
@@ -48,7 +46,6 @@ public class Level : MonoBehaviour, ICountCubesProvider
 
         if (CountCubes <= 0)
         {
-            await UniTask.Delay(_millisecondsDelay);
             var countCubesInLevel = _level.Count;
             _messageBus.Publish(new LevelCompleteEvent(countCubesInLevel));
         }

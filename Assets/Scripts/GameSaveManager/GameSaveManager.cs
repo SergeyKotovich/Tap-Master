@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using YG;
 
 public class GameSaveManager
 {
@@ -22,6 +23,7 @@ public class GameSaveManager
 
         return null;
     }
+    
 
     public void ResetData()
     {

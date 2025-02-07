@@ -25,7 +25,7 @@ public class TapHandler : MonoBehaviour
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
         HandleStandaloneInput();
-#elif UNITY_ANDROID || UNITY_IOS
+#elif UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL
     HandleMobileInput();
 #endif
     }

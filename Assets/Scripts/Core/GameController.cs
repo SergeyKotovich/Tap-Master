@@ -75,11 +75,6 @@ public class GameController : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (_currentLevel != null)
-        {
-            _currentLevel.DestroyLevel();
-        }
-
         _indexCurrentLevel++;
         LoadLevel();
     }
@@ -87,15 +82,9 @@ public class GameController : MonoBehaviour
     [UsedImplicitly]
     public void RestartLevel()
     {
-        if (_currentLevel != null)
-        {
-            _currentLevel.DestroyLevel();
-        }
-
         LoadLevel();
     }
-
-
+                   
     private void LoadLevel()
     {
         if (_currentLevel != null)

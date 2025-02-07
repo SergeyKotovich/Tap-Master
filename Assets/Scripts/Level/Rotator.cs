@@ -28,10 +28,11 @@ public class Rotator : MonoBehaviour
 
 #if UNITY_STANDALONE || UNITY_EDITOR
         HandleMouseInput();
-#elif UNITY_ANDROID || UNITY_IOS
-        HandleTouchInput();
+#elif UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL
+    HandleTouchInput();
 #endif
     }
+
 
     private void HandleMouseInput()
     {

@@ -35,7 +35,7 @@ namespace ScreensController
 
         private async UniTask ShowDefeatScreen()
         {
-            await UniTask.Delay(600);
+            await UniTask.Delay(300);
             
             if (_levelCompleted)
             {
@@ -48,6 +48,7 @@ namespace ScreensController
 
         private async UniTask ShowVictoryScreen()
         {
+            await UniTask.Delay(200);
             _levelCompleted = true;
             _victoryScreen.SetActive(true);
             SoundsManager.Instance.PlayVictory();
