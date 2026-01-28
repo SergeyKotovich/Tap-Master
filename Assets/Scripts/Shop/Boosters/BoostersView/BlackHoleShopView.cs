@@ -8,6 +8,7 @@ public class BlackHoleShopView : BoosterShopView
         _costBuyingBooster.text = shopConfig.CostBlackHole.ToString();
         _costUnlockBooster.text = shopConfig.CostUnlockBlackHole.ToString();
         _unlockLevel.text = shopConfig.UnlockLevelForBlackHoleBooster.ToString();
+       // buyToUnlockButton.onClick.AddListener();
     }
 
     public override void CanUnlockBooster(int currentLevel)

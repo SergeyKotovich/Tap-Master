@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
         _inventoryView.Initialize(inventory, _shopConfig);
         _movesCounterView.Initialize(movesCounter);
         _scoreView.Initialize(scoreController);
+        //Todo доделать раннее открытие бустеров за денюжку
     }
 
     public void UpdateLevelInfo(int levelNumber)

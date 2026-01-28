@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f2ebfab5384d43a2fb54d7b4790c5b, type: 3}
   m_Name: ShopConfig
   m_EditorClassIdentifier: 
-  <CostRockets>k__BackingField: 1
-  <CostLaser>k__BackingField: 1
-  <CostBlackHole>k__BackingField: 1
-  <CostUnlockRockets>k__BackingField: 20
-  <CostUnlockLaser>k__BackingField: 20
-  <CostUnlockBlackHole>k__BackingField: 20
-  <CostStandardSkin>k__BackingField: 1
-  <UnlockLevelForRocketBooster>k__BackingField: 2
-  <UnlockLevelForLaserBooster>k__BackingField: 2
-  <UnlockLevelForBlackHoleBooster>k__BackingField: 2
-  <CostStandardBackground>k__BackingField: 1
+  <CostRockets>k__BackingField: 1000
+  <CostLaser>k__BackingField: 1500
+  <CostBlackHole>k__BackingField: 1200
+  <CostUnlockRockets>k__BackingField: 3000
+  <CostUnlockLaser>k__BackingField: 7000
+  <CostUnlockBlackHole>k__BackingField: 5000
+  <CostStandardSkin>k__BackingField: 2000
+  <UnlockLevelForRocketBooster>k__BackingField: 10
+  <UnlockLevelForLaserBooster>k__BackingField: 25
+  <UnlockLevelForBlackHoleBooster>k__BackingField: 20
+  <CostStandardBackground>k__BackingField: 5000

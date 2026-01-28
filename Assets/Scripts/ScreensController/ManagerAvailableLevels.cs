@@ -13,10 +13,12 @@ public class ManagerAvailableLevels : MonoBehaviour
     private readonly List<LevelButtonManager> _levelPlates = new();
     private ILevelsProvider _levelsProvider;
     private AsyncMessageBus _messageBus;
+    private Rotator _rotator;
 
     [Inject]
-    public void Construct(ILevelsProvider levelsProvider, AsyncMessageBus messageBus)
+    public void Construct(ILevelsProvider levelsProvider, AsyncMessageBus messageBus, Rotator rotator)
     {
+        _rotator = rotator;
         _messageBus = messageBus;
         _levelsProvider = levelsProvider;
         _allLevels = levelsProvider.Levels;
@@ -51,7 +53,7 @@ public class ManagerAvailableLevels : MonoBehaviour
         for (var indexLevel = 0; indexLevel < _allLevels; indexLevel++)
         {
            var levelPlate = Instantiate(_plateLevelPrefab, _parent);
-           levelPlate.Initialize(_messageBus, indexLevel);
+           levelPlate.Initialize(_messageBus, indexLevel, _rotator);
            _levelPlates.Add(levelPlate);
         }
     }

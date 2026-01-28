@@ -39,7 +39,7 @@ public class BackgroundsLoader : MonoBehaviour
             return;
         }
 
-        if (type == BackgroundsType.Saturn)
+     /*   if (type == BackgroundsType.Saturn)
         {
             _background.localScale = _sizeSaturn;
             _background.localPosition = Vector3.zero;
@@ -49,7 +49,7 @@ public class BackgroundsLoader : MonoBehaviour
             _background.localScale = _sizeAnotherPlanet;
             _background.localPosition = _positionAnotherPlanet;
         }
-
+*/
         var value = _videos[type];
         var videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, value);
 
