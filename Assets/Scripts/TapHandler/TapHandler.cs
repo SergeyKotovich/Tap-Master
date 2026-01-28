@@ -76,7 +76,11 @@ public class TapHandler : MonoBehaviour
             if (cube.IsMoving) return;
 
             cube.TryMove();
-            SoundsManager.Instance.PlayClick();
+            
+            if (SoundsManager.Instance != null)
+            {
+                SoundsManager.Instance.PlayClick();
+            }
         }
     }
 
